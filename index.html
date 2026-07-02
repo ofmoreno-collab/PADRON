@@ -46,7 +46,6 @@
             margin: 5px 0 0 0; 
             font-size: 26px; 
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
         header p { 
             margin: 8px 0 0 0; 
@@ -113,23 +112,24 @@
             font-size: 16px; 
             font-weight: bold; 
             cursor: pointer; 
-            transition: background-color 0.2s, transform 0.1s; 
+            transition: background-color 0.2s; 
             box-shadow: 0 3px 6px rgba(0,74,153,0.2);
         }
         .btn-verificar:hover { background: var(--azul-oscuro); }
         .btn-verificar:disabled { background: #cccccc; cursor: not-allowed; box-shadow: none; }
         
-        /* ESTADOS DE CARGA */
-        .estado-carga {
+        /* ALERTAS DE CONEXIÓN DEL PADRÓN */
+        .estado-padrón {
             font-size: 14px;
             font-weight: bold;
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
+            text-align: center;
         }
         .cargando { background-color: #fff3cd; color: #856404; }
-        .listo { background-color: #d4edda; color: #155724; display: none; }
         .error { background-color: #f8d7da; color: #721c24; }
+        .listo { display: none; } /* Se oculta automáticamente cuando todo está correcto */
 
         /* ENLACES INFERIORES */
         .portal-grid { 
@@ -147,8 +147,7 @@
             border: 1px solid rgba(0,0,0,0.03);
         }
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
-        .card p { color: #666; font-size: 14px; line-height: 1.5;}
-        .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px; font-size: 15px;}
+        .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
 
         /* SECCIÓN DE LOGOS PIE */
         .pie-logos { background: var(--blanco); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 40px; }
@@ -179,7 +178,7 @@
 
     <header>
         <div class="header-container">
-            <img src="https://i.imgur.com/vHqY71Z.jpg" alt="Logo AMP" class="logo-amp" onerror="this.style.display='none'">
+            <img src="https://i.imgur.com/vHqY71Z.jpg" alt="Logo AMP" class="logo-amp">
             <h1>Gestión Institucional AMP</h1>
             <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
         </div>
@@ -189,7 +188,7 @@
         <section class="portal-verificador">
             <h3>Verificación de Afiliados</h3>
             
-            <div id="statusIndicator" class="estado-carga cargando">🔄 Conectando con el padrón...</div>
+            <div id="statusIndicator" class="estado-padrón cargando">🔄 Conectando con el servidor de afiliados...</div>
 
             <form id="formVerificador" onsubmit="buscarAfiliado(event)">
                 <div class="form-grupo">
@@ -234,25 +233,24 @@
         let lineasPlanilla = [];
         let separador = ',';
 
-        // ACCIÓN AUTOMÁTICA: Lee directamente el archivo subido en tu GitHub
+        // LÓGICA DE CONEXIÓN AUTOMÁTICA DIRECTA AL SERVIDOR
         window.addEventListener('DOMContentLoaded', () => {
-            const urlPlanilla = 'afiliados.csv'; // Al estar en la misma carpeta, se lee de forma directa y transparente
-            
-            fetch(urlPlanilla)
+            // Buscamos el archivo que subiste al lado de este index.html
+            fetch('afiliados.csv')
                 .then(response => {
-                    if (!response.ok) throw new Error("No se pudo encontrar el archivo afiliados.csv");
+                    if (!response.ok) throw new Error("Archivo no encontrado");
                     return response.text();
                 })
                 .then(contenido => {
                     lineasPlanilla = contenido.split(/\r?\n/);
                     
-                    // Detectar automáticamente el separador de Excel
+                    // Detecta si tu Excel guardó con comas o puntos y comas
                     if (lineasPlanilla.length > 0) {
                         separador = lineasPlanilla[0].includes(';') ? ';' : ',';
                     }
                     
-                    // Habilitar la interfaz de forma inmediata
-                    document.getElementById('statusIndicator').className = 'estado-carga listo';
+                    // Habilitar el sistema automáticamente
+                    document.getElementById('statusIndicator').className = 'estado-padrón listo';
                     document.getElementById('dni_buscado').disabled = false;
                     document.getElementById('btnSubmit').disabled = false;
                     document.getElementById('dni_buscado').focus();
@@ -260,11 +258,12 @@
                 .catch(error => {
                     console.error(error);
                     const indicator = document.getElementById('statusIndicator');
-                    indicator.className = 'estado-carga error';
-                    indicator.innerText = '❌ Error: Asegúrate de que afiliados.csv esté subido en tu GitHub';
+                    indicator.className = 'estado-padrón error';
+                    indicator.innerText = '❌ Error de sincronización: El archivo "afiliados.csv" no está en el servidor de GitHub.';
                 });
         });
 
+        // Búsqueda interna
         function buscarAfiliado(event) {
             event.preventDefault();
             const dniBuscado = document.getElementById('dni_buscado').value.replace(/[^0-9]/g, '');

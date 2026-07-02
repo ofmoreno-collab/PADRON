@@ -177,7 +177,7 @@
 
     <header>
         <div class="header-container">
-            <img src="logo-amp.jpg" alt="Logo AMP" class="logo-amp" onerror="this.style.display='none'">
+            <img src="logo-amp.jpg" alt="Logo AMP" class="logo-amp">
             <h1>Gestión Institucional AMP</h1>
             <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
         </div>
@@ -218,7 +218,7 @@
     </div>
 
     <footer class="pie-logos">
-        <img src="logos-pie.jpg" alt="Logos Centrales Obreras" class="logo-footer" onerror="this.style.display='none'">
+        <img src="logos-pie.jpeg" alt="Logos Centrales Obreras" class="logo-footer">
     </footer>
 
     <div id="modalResultado" class="modal-overlay">
@@ -230,7 +230,8 @@
         let separador = ',';
 
         window.addEventListener('DOMContentLoaded', () => {
-            fetch('afiliados.csv')
+            // Corregido para que busque exactamente "Afiliados.csv" con la A mayúscula como lo tienes tú
+            fetch('Afiliados.csv')
                 .then(response => {
                     if (!response.ok) throw new Error("Archivo no encontrado");
                     return response.text();
@@ -251,7 +252,7 @@
                     console.error(error);
                     const indicator = document.getElementById('statusIndicator');
                     indicator.className = 'estado-padrón error';
-                    indicator.innerText = '❌ Error: Asegúrate de que "afiliados.csv" esté en tu GitHub.';
+                    indicator.innerText = '❌ Error: Asegúrate de que "Afiliados.csv" esté en tu GitHub.';
                 });
         });
 

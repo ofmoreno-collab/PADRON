@@ -101,7 +101,7 @@
         
         .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
         
-        /* BOTÓN DE WHATSAPP SOLICITADO */
+        /* BOTÓN DE WHATSAPP */
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -182,11 +182,11 @@
         window.addEventListener('DOMContentLoaded', () => {
             const timestamp = new Date().getTime();
             
-            // Intentamos cargar usando todas las variaciones posibles de nombres de archivo detectados
+            // Hemos añadido de manera explícita la ruta con las comillas codificadas al principio de la lista
             const archivosAIntentar = [
-                '%22Afiliados.csv%22', // Nombre con comillas literales codificadas para URL ("Afiliados.csv")
-                'Afiliados.csv',       // Mayúscula sin comillas
-                'afiliados.csv'        // Minúscula sin comillas
+                '%22Afiliados.csv%22', 
+                'Afiliados.csv',       
+                'afiliados.csv'        
             ];
 
             let intentoActual = 0;
@@ -236,6 +236,7 @@
                 const columnas = lineasPlanilla[i].split(separador);
                 if (columnas.length < 4) continue;
                 
+                // Limpieza extra: Quitamos cualquier comilla que pueda venir dentro del CSV en la columna de DNI
                 const dniCSV = columnas[3].replace(/[^0-9]/g, '');
                 
                 if (dniCSV === dniBuscado) {

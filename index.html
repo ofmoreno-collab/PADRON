@@ -30,16 +30,8 @@
             text-align: center; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
-        header h1 { 
-            margin: 0; 
-            font-size: 28px; 
-            font-weight: 700;
-        }
-        header p { 
-            margin: 10px 0 0 0; 
-            opacity: 0.9; 
-            font-size: 16px;
-        }
+        header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+        header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 16px; }
         
         .container { 
             max-width: 1000px; 
@@ -58,20 +50,10 @@
             border: 1px solid rgba(0,0,0,0.05);
             text-align: center;
         }
-        .portal-verificador h3 { 
-            color: var(--azul-principal); 
-            margin-top: 0; 
-            font-size: 22px;
-            font-weight: 600;
-        }
+        .portal-verificador h3 { color: var(--azul-principal); margin-top: 0; font-size: 22px; font-weight: 600; }
         
         .form-grupo { margin-bottom: 25px; text-align: left; }
-        .form-grupo label { 
-            display: block; 
-            margin-bottom: 10px; 
-            font-weight: 600; 
-            font-size: 15px;
-        }
+        .form-grupo label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px; }
         
         .form-grupo input[type="text"] { 
             width: 100%; 
@@ -80,13 +62,7 @@
             border-radius: 6px; 
             box-sizing: border-box; 
             font-size: 16px; 
-            transition: border-color 0.2s;
             background-color: #fafafa;
-        }
-        .form-grupo input[type="text"]:focus {
-            border-color: var(--azul-principal);
-            outline: none;
-            background-color: var(--blanco);
         }
         
         .btn-verificar { 
@@ -99,52 +75,28 @@
             font-size: 16px; 
             font-weight: bold; 
             cursor: pointer; 
-            transition: background-color 0.2s; 
             box-shadow: 0 3px 6px rgba(0,74,153,0.2);
         }
         .btn-verificar:hover { background: var(--azul-oscuro); }
         .btn-verificar:disabled { background: #cccccc; cursor: not-allowed; box-shadow: none; }
         
-        .estado-padrón {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-        }
+        .estado-padrón { font-size: 14px; font-weight: bold; margin-bottom: 20px; padding: 12px; border-radius: 6px; text-align: center; }
         .cargando { background-color: #fff3cd; color: #856404; }
         .error { background-color: #f8d7da; color: #721c24; }
         .listo { display: none; }
 
-        .portal-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
-            margin-bottom: 50px; 
-        }
-        .card { 
-            background: var(--blanco); 
-            padding: 30px; 
-            border-radius: 12px; 
-            text-align: center; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
-            border: 1px solid rgba(0,0,0,0.03);
-        }
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.03); }
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
         .card p { color: #555; font-size: 14px; line-height: 1.5; }
         .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
 
-        /* VENTANA EMERGENTE (MODAL) */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background: var(--blanco); padding: 35px 30px; border-radius: 16px; width: 90%; max-width: 440px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; box-sizing: border-box;
-        }
+        /* MODAL EMERGENTE */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--blanco); padding: 35px 30px; border-radius: 16px; width: 90%; max-width: 440px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; box-sizing: border-box; }
         .modal-icono { font-size: 60px; margin-bottom: 15px; }
         .modal-titulo { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
-        .modal-datos { background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); box-sizing: border-box;}
+        .modal-datos { background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); }
         .modal-datos p { margin: 8px 0; font-size: 16px; }
         
         .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
@@ -165,7 +117,7 @@
             box-sizing: border-box;
             transition: background-color 0.2s;
             box-shadow: 0 3px 6px rgba(37,211,102,0.2);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .btn-whatsapp:hover { background-color: var(--verde-whatsapp-oscuro); }
         
@@ -173,7 +125,7 @@
         .status-valido .modal-datos { border-left-color: #28a745; background-color: #f4faf6; }
         .status-invalido { color: #dc3545; }
         .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; text-align: center; }
-        .status-invalido .mensaje-critico { font-size: 20px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; }
+        .status-invalido .mensaje-critico { font-size: 22px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; }
     </style>
 </head>
 <body>
@@ -189,7 +141,7 @@
         <section class="portal-verificador">
             <h3>Verificación de Afiliados</h3>
             
-            <div id="statusIndicator" class="estado-padrón cargando">🔄 Conectando con el servidor de afiliados...</div>
+            <div id="statusIndicator" class="estado-padrón cargando">🔄 Sincronizando base de datos de afiliados...</div>
 
             <form id="formVerificador" onsubmit="buscarAfiliado(event)">
                 <div class="form-grupo">
@@ -228,31 +180,34 @@
         let separador = ',';
 
         window.addEventListener('DOMContentLoaded', () => {
-            // El truco definitivo: Añade una marca de tiempo automática (?v=...) 
-            // para obligar al navegador a leer el archivo "afiliados.csv" real de GitHub 
-            // ignorando cualquier error de caché acumulado anteriormente.
-            fetch('afiliados.csv?v=' + new Date().getTime())
-                .then(response => {
-                    if (!response.ok) throw new Error("No encontrado");
-                    return response.text();
-                })
-                .then(contenido => {
-                    lineasPlanilla = contenido.split(/\r?\n/);
-                    if (lineasPlanilla.length > 0) {
-                        separador = lineasPlanilla[0].includes(';') ? ';' : ',';
-                    }
-                    document.getElementById('statusIndicator').className = 'estado-padrón listo';
-                    document.getElementById('dni_buscado').disabled = false;
-                    document.getElementById('btnSubmit').disabled = false;
-                    document.getElementById('dni_buscado').focus();
-                })
-                .catch(error => {
-                    console.error(error);
-                    const indicator = document.getElementById('statusIndicator');
-                    indicator.className = 'estado-padrón error';
-                    indicator.innerText = '❌ Error de sincronización: Intente recargar la página.';
+            const timestamp = new Date().getTime();
+            
+            // Intenta cargar primero afiliados.csv (minúscula) y si falla intenta con Afiliados.csv (Mayúscula)
+            fetch('afiliados.csv?v=' + timestamp)
+                .then(res => { if(!res.ok) throw new Error(); return res.text(); })
+                .then(data => procesarContenido(data))
+                .catch(() => {
+                    fetch('Afiliados.csv?v=' + timestamp)
+                        .then(res => { if(!res.ok) throw new Error(); return res.text(); })
+                        .then(data => procesarContenido(data))
+                        .catch(() => {
+                            const indicator = document.getElementById('statusIndicator');
+                            indicator.className = 'estado-padrón error';
+                            indicator.innerText = '❌ Error de lectura de datos. Verifique su archivo CSV.';
+                        });
                 });
         });
+
+        function procesarContenido(contenido) {
+            lineasPlanilla = contenido.split(/\r?\n/);
+            if (lineasPlanilla.length > 0) {
+                separador = lineasPlanilla[0].includes(';') ? ';' : ',';
+            }
+            document.getElementById('statusIndicator').className = 'estado-padrón listo';
+            document.getElementById('dni_buscado').disabled = false;
+            document.getElementById('btnSubmit').disabled = false;
+            document.getElementById('dni_buscado').focus();
+        }
 
         function buscarAfiliado(event) {
             event.preventDefault();
@@ -298,8 +253,7 @@
                     <button class="btn-cerrar" style="background-color: #28a745;" onclick="cerrarModal()">Entendido</button>
                 `;
             } else {
-                // Configuración exacta para el mensaje de WhatsApp dirigido al 3804590118
-                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón comercial y figura como No registrado. Solicito verificación de afiliación.`);
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón y figura como No registrado. Solicito verificación de afiliación.`);
                 const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
 
                 content.innerHTML = `
@@ -307,7 +261,7 @@
                     <div class="modal-titulo" style="color: #dc3545;">Atención Comercio</div>
                     <div class="modal-datos">
                         <div class="mensaje-critico">No registrado</div>
-                        <p style="color: #666; margin-bottom: 12px; font-size: 14px;">DNI consultado: <strong>${dni}</strong></p>
+                        <p style="color: #666; margin-bottom: 5px; font-size: 14px;">El DNI <strong>${dni}</strong> no se encuentra en la base de datos oficial.</p>
                     </div>
                     
                     <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp">

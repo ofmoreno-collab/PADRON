@@ -14,17 +14,15 @@
             --texto-oscuro: #333333;
             --verde-whatsapp: #25D366;
             --verde-whatsapp-oscuro: #128C7E;
+            --naranja: #ffc107;
+            --rojo: #dc3545;
         }
         
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
             margin: 0; 
-            /* Configuración del GIF de fondo constante, centrado y cubriendo toda la pantalla */
-            background-image: linear-gradient(rgba(244, 246, 249, 0.85), rgba(244, 246, 249, 0.85)), url('https://raw.githubusercontent.com/ofmoreno-collab/PADRON/main/Intro%20la%20voz%20docente%20(1).gif');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            /* Fondo limpio usando tus recursos originales */
+            background-color: var(--gris-fondo);
             color: var(--texto-oscuro); 
             min-height: 100vh;
         }
@@ -37,7 +35,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        /* Contenedor del encabezado para alinear el logo de forma sutil */
         .header-content {
             display: flex;
             align-items: center;
@@ -48,7 +45,6 @@
             flex-wrap: wrap;
         }
 
-        /* Estilos sutiles para el Logo de AMP */
         .header-logo {
             height: 65px;
             width: auto;
@@ -65,7 +61,6 @@
         header h1 { margin: 0; font-size: 28px; font-weight: 700; }
         header p { margin: 6px 0 0 0; opacity: 0.9; font-size: 16px; }
         
-        /* Ajuste responsivo para pantallas pequeñas */
         @media (max-width: 600px) {
             .header-content { flex-direction: column; text-align: center; gap: 12px; }
             .header-text { text-align: center; }
@@ -80,17 +75,14 @@
             box-sizing: border-box;
         }
         
-        /* CUADRO DE VERIFICACIÓN MUCHO MÁS TRANSPARENTE */
         .portal-verificador { 
-            background: rgba(255, 255, 255, 0.4); 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.9); 
             padding: 40px 30px; 
             border-radius: 12px; 
             max-width: 520px; 
             margin: 0 auto 40px auto; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
             text-align: center;
         }
         .portal-verificador h3 { color: var(--azul-principal); margin-top: 0; font-size: 22px; font-weight: 600; }
@@ -105,7 +97,6 @@
             border-radius: 6px; 
             box-sizing: border-box; 
             font-size: 16px; 
-            background-color: rgba(255, 255, 255, 0.7);
         }
         
         .btn-verificar { 
@@ -131,7 +122,6 @@
         .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
         .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
         
-        /* Estilos específicos para las tarjetas interactivas con imágenes/gifs */
         .card-link {
             text-decoration: none;
             color: inherit;
@@ -148,10 +138,6 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
-        /* El GIF queda cubriendo el espacio de manera más inmersiva */
-        .card-media-gif {
-            object-fit: cover;
-        }
 
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
         .card p { color: #555; font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
@@ -162,12 +148,11 @@
         .modal-content { background: var(--blanco); padding: 35px 30px; border-radius: 16px; width: 90%; max-width: 440px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; box-sizing: border-box; }
         .modal-icono { font-size: 60px; margin-bottom: 15px; }
         .modal-titulo { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
-        .modal-datos { background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); }
+        .modal-datos { padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); }
         .modal-datos p { margin: 8px 0; font-size: 16px; }
         
         .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
         
-        /* BOTÓN DE WHATSAPP */
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -189,6 +174,10 @@
         
         .status-valido { color: #155724; }
         .status-valido .modal-datos { border-left-color: #28a745; background-color: #f4faf6; }
+        
+        .status-pausa { color: #856404; }
+        .status-pausa .modal-datos { border-left-color: var(--naranja); background-color: #fffbeb; }
+        
         .status-invalido { color: #dc3545; }
         .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; text-align: center; }
         .status-invalido .mensaje-critico { font-size: 22px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; }
@@ -211,7 +200,7 @@
         <section class="portal-verificador">
             <h3>Verificación de Afiliados</h3>
             
-            <div id="statusIndicator" class="estado-padrón cargando">🔄 Sincronizando base de datos de afiliados...</div>
+            <div id="statusIndicator" class="estado-padrón">🔄 Sincronizando base de datos de afiliados...</div>
 
             <form id="formVerificador" onsubmit="buscarAfiliado(event)">
                 <div class="form-grupo">
@@ -224,7 +213,7 @@
 
         <section class="portal-grid">
             <a href="https://www.youtube.com/@fermoreno5056/featured" target="_blank" class="card card-link">
-                <img src="Intro la voz docente (1).gif" alt="Intro la voz docente" class="card-media card-media-gif">
+                <img src="Intro la voz docente (1).gif" alt="Intro la voz docente" class="card-media">
                 <span style="color: var(--azul-principal); font-weight: bold; margin-top: auto;">Ir a la Voz Docente ↗️</span>
             </a>
 
@@ -251,40 +240,27 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const timestamp = new Date().getTime();
-            
-            const archivosAIntentar = [
-                '%22Afiliados.csv%22', 
-                'Afiliados.csv',       
-                'afiliados.csv'        
-            ];
+            const indicator = document.getElementById('statusIndicator');
+            indicator.className = 'estado-padrón cargando';
 
-            let intentoActual = 0;
-
-            function intentarCargar() {
-                if (intentoActual >= archivosAIntentar.length) {
-                    const indicator = document.getElementById('statusIndicator');
-                    indicator.className = 'estado-padrón error';
-                    indicator.innerText = '❌ Error de sincronización. No se pudo leer la base de datos. Verifica el archivo en GitHub.';
-                    return;
-                }
-
-                fetch(archivosAIntentar[intentoActual] + '?v=' + timestamp)
-                    .then(res => { 
-                        if(!res.ok) throw new Error(); 
-                        return res.text(); 
-                    })
-                    .then(data => procesarContenido(data))
-                    .catch(() => {
-                        intentoActual++;
-                        intentarCargar();
-                    });
-            }
-
-            try {
-                intentarCargar();
-            } catch(e) {
-                console.error(e);
-            }
+            // Intentamos cargar la URL de GitHub ignorando la caché.
+            // Si el archivo está en tu mismo repositorio, llamarlo de forma relativa es lo más seguro.
+            fetch('Afiliados.csv?v=' + timestamp)
+                .then(res => { 
+                    if(!res.ok) throw new Error(); 
+                    return res.text(); 
+                })
+                .then(data => procesarContenido(data))
+                .catch(() => {
+                    // Intento alternativo por si está guardado en minúsculas en GitHub
+                    fetch('afiliados.csv?v=' + timestamp)
+                        .then(res => res.text())
+                        .then(data => procesarContenido(data))
+                        .catch(() => {
+                            indicator.className = 'estado-padrón error';
+                            indicator.innerText = '❌ Error de sincronización. No se pudo leer la base de datos.';
+                        });
+                });
         });
 
         function procesarContenido(contenido) {
@@ -301,7 +277,7 @@
         function buscarAfiliado(event) {
             event.preventDefault();
             const dniBuscado = document.getElementById('dni_buscado').value.replace(/[^0-9]/g, '');
-            let encontrado = false;
+            let afiliadoEncontrado = null;
             
             for (let i = 1; i < lineasPlanilla.length; i++) {
                 if (!lineasPlanilla[i].trim()) continue;
@@ -312,51 +288,85 @@
                 const dniCSV = columnas[3].replace(/[^0-9]/g, '');
                 
                 if (dniCSV === dniBuscado) {
-                    const apellidos = columnas[1].replace(/"/g, '').trim();
-                    const nombres = columnas[2].replace(/"/g, '').trim();
-                    mostrarModal('valido', `${nombres} ${apellidos}`, dniBuscado);
-                    encontrado = true;
+                    const apellidos = columnas[1] ? columnas[1].replace(/"/g, '').trim() : '';
+                    const nombres = columnas[2] ? columnas[2].replace(/"/g, '').trim() : '';
+                    const estado = columnas[4] ? columnas[4].replace(/"/g, '').trim() : 'Activo';
+                    
+                    afiliadoEncontrado = {
+                        nombreCompleto: `${nombres} ${apellidos}`,
+                        dni: dniBuscado,
+                        estado: estado
+                    };
                     break;
                 }
             }
             
-            if (!encontrado) {
-                mostrarModal('invalido', null, dniBuscado);
+            if (afiliadoEncontrado) {
+                if (afiliadoEncontrado.estado === 'Activo') {
+                    mostrarModal('valido', afiliadoEncontrado.nombreCompleto, afiliadoEncontrado.dni, 'Activo');
+                } else if (afiliadoEncontrado.estado === 'Pausa') {
+                    mostrarModal('pausa', afiliadoEncontrado.nombreCompleto, afiliadoEncontrado.dni, 'Pausa (Con Deuda)');
+                } else if (afiliadoEncontrado.estado === 'Baja') {
+                    mostrarModal('invalido', null, dniBuscado, 'Baja');
+                }
+            } else {
+                mostrarModal('invalido', null, dniBuscado, 'No registrado');
             }
         }
 
-        function mostrarModal(estado, nombreCompleto, dni) {
+        function mostrarModal(tipoModal, nombreCompleto, dni, estadoTexto) {
             const modal = document.getElementById('modalResultado');
             const content = document.getElementById('modalContent');
-            content.className = 'modal-content status-' + estado;
             
-            if (estado === 'valido') {
+            if (tipoModal === 'valido') {
+                content.className = 'modal-content status-valido';
                 content.innerHTML = `
                     <div class="modal-icono">✅</div>
-                    <div class="modal-titulo" style="color: #28a745;">Afiliado Encontrado</div>
+                    <div class="modal-titulo" style="color: #28a745;">Afiliado Habilitado</div>
                     <div class="modal-datos">
                         <p><strong>Nombre:</strong> ${nombreCompleto}</p>
                         <p><strong>DNI:</strong> ${dni}</p>
-                        <p><strong>Estado:</strong> <span style="color:#28a745; font-weight:bold;">Registrado</span></p>
+                        <p><strong>Estado:</strong> <span style="color:#28a745; font-weight:bold;">${estadoTexto}</span></p>
                     </div>
                     <button class="btn-cerrar" style="background-color: #28a745;" onclick="cerrarModal()">Entendido</button>
                 `;
-            } else {
-                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón y figura como No registrado. Solicito verificación de afiliación.`);
+            } 
+            else if (tipoModal === 'pausa') {
+                content.className = 'modal-content status-pausa';
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} y figura en estado: Pausa (Con deuda). Solicito regularizar situación.`);
+                const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
+                
+                content.innerHTML = `
+                    <div class="modal-icono">⏸️</div>
+                    <div class="modal-titulo" style="color: var(--naranja);">Atención Comercio</div>
+                    <div class="modal-datos">
+                        <p><strong>Nombre:</strong> ${nombreCompleto}</p>
+                        <p><strong>DNI:</strong> ${dni}</p>
+                        <p><strong>Estado:</strong> <span style="color:var(--naranja); font-weight:bold;">${estadoTexto}</span></p>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;">El servicio se encuentra suspendido temporalmente.</p>
+                    </div>
+                    <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp" style="background-color: var(--naranja); color: black;">
+                        💬 Informes secretaría administrativa
+                    </a>
+                    <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+                `;
+            } 
+            else {
+                content.className = 'modal-content status-invalido';
+                const motivoLabel = estadoTexto === 'Baja' ? 'Dado de Baja' : 'No registrado';
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón y figura como ${motivoLabel}. Solicito verificación de afiliación.`);
                 const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
 
                 content.innerHTML = `
                     <div class="modal-icono">⚠️</div>
                     <div class="modal-titulo" style="color: #dc3545;">Atención Comercio</div>
                     <div class="modal-datos">
-                        <div class="mensaje-critico">No registrado</div>
-                        <p style="color: #666; margin-bottom: 5px; font-size: 14px;">El DNI <strong>${dni}</strong> no se encuentra en la base de datos oficial.</p>
+                        <div class="mensaje-critico">${motivoLabel}</div>
+                        <p style="color: #666; margin-bottom: 5px; font-size: 14px;">El DNI <strong>${dni}</strong> no se encuentra autorizado en la base de datos oficial.</p>
                     </div>
-                    
                     <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp">
                         💬 Informes secretaría administrativa
                     </a>
-                    
                     <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
                 `;
             }

@@ -182,20 +182,36 @@
         window.addEventListener('DOMContentLoaded', () => {
             const timestamp = new Date().getTime();
             
-            // Intenta cargar primero afiliados.csv (minúscula) y si falla intenta con Afiliados.csv (Mayúscula)
-            fetch('afiliados.csv?v=' + timestamp)
-                .then(res => { if(!res.ok) throw new Error(); return res.text(); })
-                .then(data => procesarContenido(data))
-                .catch(() => {
-                    fetch('Afiliados.csv?v=' + timestamp)
-                        .then(res => { if(!res.ok) throw new Error(); return res.text(); })
-                        .then(data => procesarContenido(data))
-                        .catch(() => {
-                            const indicator = document.getElementById('statusIndicator');
-                            indicator.className = 'estado-padrón error';
-                            indicator.innerText = '❌ Error de lectura de datos. Verifique su archivo CSV.';
-                        });
-                });
+            // Intentamos cargar usando todas las variaciones posibles de nombres de archivo detectados
+            const archivosAIntentar = [
+                '%22Afiliados.csv%22', // Nombre con comillas literales codificadas para URL ("Afiliados.csv")
+                'Afiliados.csv',       // Mayúscula sin comillas
+                'afiliados.csv'        // Minúscula sin comillas
+            ];
+
+            let intentoActual = 0;
+
+            function intentarCargar() {
+                if (intentoActual >= archivosAIntentar.length) {
+                    const indicator = document.getElementById('statusIndicator');
+                    indicator.className = 'estado-padrón error';
+                    indicator.innerText = '❌ Error de sincronización. No se pudo leer la base de datos. Verifica el archivo en GitHub.';
+                    return;
+                }
+
+                fetch(archivosAIntentar[intentoActual] + '?v=' + timestamp)
+                    .then(res => { 
+                        if(!res.ok) throw new Error(); 
+                        return res.text(); 
+                    })
+                    .then(data => procesarContenido(data))
+                    .catch(() => {
+                        intentoActual++;
+                        intentarCargar();
+                    });
+            }
+
+            intentarCargar();
         });
 
         function procesarContenido(contenido) {

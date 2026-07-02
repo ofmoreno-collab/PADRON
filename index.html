@@ -228,7 +228,9 @@
         let separador = ',';
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Se fuerza la búsqueda estricta añadiendo un parámetro para saltar la caché vieja del navegador
+            // El truco definitivo: Añade una marca de tiempo automática (?v=...) 
+            // para obligar al navegador a leer el archivo "afiliados.csv" real de GitHub 
+            // ignorando cualquier error de caché acumulado anteriormente.
             fetch('afiliados.csv?v=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) throw new Error("No encontrado");
@@ -248,7 +250,7 @@
                     console.error(error);
                     const indicator = document.getElementById('statusIndicator');
                     indicator.className = 'estado-padrón error';
-                    indicator.innerText = '❌ Error de sincronización: Recargue la página (Ctrl + F5).';
+                    indicator.innerText = '❌ Error de sincronización: Intente recargar la página.';
                 });
         });
 
@@ -296,8 +298,8 @@
                     <button class="btn-cerrar" style="background-color: #28a745;" onclick="cerrarModal()">Entendido</button>
                 `;
             } else {
-                // Texto personalizado de WhatsApp para la secretaría
-                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón de comercio y figura como No registrado. Solicito verificación de afiliación.`);
+                // Configuración exacta para el mensaje de WhatsApp dirigido al 3804590118
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón comercial y figura como No registrado. Solicito verificación de afiliación.`);
                 const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
 
                 content.innerHTML = `

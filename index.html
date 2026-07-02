@@ -5,35 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Gestión - AMP</title>
     <style>
-        :root { --azul-principal: #004a99; --blanco: #ffffff; --gris: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--gris); color: #333; }
+        :root { 
+            --azul-principal: #004a99; 
+            --azul-oscuro: #003366;
+            --blanco: #ffffff; 
+            --gris-fondo: #f4f6f9; 
+            --gris-borde: #cccccc;
+            --texto-oscuro: #333333;
+        }
         
-        header { background: var(--azul-principal); color: var(--blanco); padding: 40px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 28px; }
-        header p { margin: 10px 0 0 0; opacity: 0.9; }
+        body { 
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
+            margin: 0; 
+            background-color: var(--gris-fondo); 
+            color: var(--texto-oscuro); 
+        }
         
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        /* CABECERA INSTITUCIONAL */
+        header { 
+            background: var(--azul-principal); 
+            color: var(--blanco); 
+            padding: 30px 20px; 
+            text-align: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .logo-amp {
+            max-width: 180px;
+            height: auto;
+            background: var(--blanco);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        header h1 { 
+            margin: 5px 0 0 0; 
+            font-size: 26px; 
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        header p { 
+            margin: 8px 0 0 0; 
+            opacity: 0.9; 
+            font-size: 15px;
+        }
         
-        /* Módulo Verificador */
+        .container { 
+            max-width: 1000px; 
+            margin: 30px auto; 
+            padding: 0 20px; 
+            box-sizing: border-box;
+        }
+        
+        /* MÓDULO VERIFICADOR */
         .portal-verificador { 
             background: var(--blanco); 
             padding: 40px 30px; 
-            border-radius: 10px; 
-            max-width: 500px; 
+            border-radius: 12px; 
+            max-width: 520px; 
             margin: 0 auto 40px auto; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
         }
-        .portal-verificador h3 { color: var(--azul-principal); margin-top: 0; text-align: center; font-size: 22px; }
+        .portal-verificador h3 { 
+            color: var(--azul-principal); 
+            margin-top: 0; 
+            font-size: 22px;
+            font-weight: 600;
+        }
         
-        .form-grupo { margin-bottom: 20px; }
-        .form-grupo label { display: block; margin-bottom: 8px; font-weight: bold; }
-        .form-grupo input[type="text"], .form-grupo input[type="file"] { 
+        .form-grupo { margin-bottom: 25px; text-align: left; }
+        .form-grupo label { 
+            display: block; 
+            margin-bottom: 10px; 
+            font-weight: 600; 
+            font-size: 15px;
+        }
+        
+        .form-grupo input[type="text"] { 
             width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px; 
+            padding: 14px; 
+            border: 1px solid var(--gris-borde); 
+            border-radius: 6px; 
             box-sizing: border-box; 
             font-size: 16px; 
+            transition: border-color 0.2s;
+            background-color: #fafafa;
+        }
+        .form-grupo input[type="text"]:focus {
+            border-color: var(--azul-principal);
+            outline: none;
+            background-color: var(--blanco);
         }
         
         .btn-verificar { 
@@ -41,121 +108,123 @@
             background: var(--azul-principal); 
             color: var(--blanco); 
             border: none; 
-            padding: 14px; 
-            border-radius: 5px; 
+            padding: 15px; 
+            border-radius: 6px; 
             font-size: 16px; 
             font-weight: bold; 
             cursor: pointer; 
-            transition: 0.3s; 
+            transition: background-color 0.2s, transform 0.1s; 
+            box-shadow: 0 3px 6px rgba(0,74,153,0.2);
         }
-        .btn-verificar:hover { background: #003366; }
+        .btn-verificar:hover { background: var(--azul-oscuro); }
+        .btn-verificar:disabled { background: #cccccc; cursor: not-allowed; box-shadow: none; }
         
-        /* Enlaces Inferiores */
-        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .card { background: var(--blanco); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card a { display: block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px; }
+        /* ESTADOS DE CARGA */
+        .estado-carga {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .cargando { background-color: #fff3cd; color: #856404; }
+        .listo { background-color: #d4edda; color: #155724; display: none; }
+        .error { background-color: #f8d7da; color: #721c24; }
 
-        /* --- VENTANA EMERGENTE (MODAL) --- */
+        /* ENLACES INFERIORES */
+        .portal-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 50px; 
+        }
+        .card { 
+            background: var(--blanco); 
+            padding: 30px; 
+            border-radius: 12px; 
+            text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
+        .card p { color: #666; font-size: 14px; line-height: 1.5;}
+        .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px; font-size: 15px;}
+
+        /* SECCIÓN DE LOGOS PIE */
+        .pie-logos { background: var(--blanco); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 40px; }
+        .logos-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; max-width: 900px; margin: 0 auto;}
+        .logo-footer { height: 35px; width: auto; opacity: 0.85;}
+
+        /* VENTANA EMERGENTE (MODAL) */
         .modal-overlay {
-            display: none; 
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(3px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;
         }
         .modal-content {
-            background: var(--blanco);
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
-            animation: entradaModal 0.3s ease-out;
+            background: var(--blanco); padding: 35px 30px; border-radius: 16px; width: 90%; max-width: 440px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; box-sizing: border-box;
         }
-        @keyframes entradaModal {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-icono { font-size: 55px; margin-bottom: 15px; }
-        .modal-titulo { font-size: 22px; font-weight: bold; margin-bottom: 15px; }
-        .modal-datos { 
-            background: #f8f9fa; 
-            padding: 15px; 
-            border-radius: 8px; 
-            text-align: left; 
-            margin-bottom: 20px;
-            border-left: 5px solid var(--azul-principal);
-        }
-        .modal-datos p { margin: 6px 0; font-size: 15px; }
-        .btn-cerrar {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-cerrar:hover { background: #5a6268; }
+        .modal-icono { font-size: 60px; margin-bottom: 15px; }
+        .modal-titulo { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+        .modal-datos { background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); box-sizing: border-box;}
+        .modal-datos p { margin: 8px 0; font-size: 16px; }
+        .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%;}
         
         .status-valido { color: #155724; }
         .status-valido .modal-datos { border-left-color: #28a745; background-color: #f4faf6; }
-        
         .status-invalido { color: #dc3545; }
         .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; text-align: center; }
-        .status-invalido .mensaje-critico { font-size: 18px; color: #dc3545; font-weight: bold; margin: 10px 0; }
+        .status-invalido .mensaje-critico { font-size: 20px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Gestión Institucional AMP</h1>
-        <p>Portal administrativo y acceso a recursos oficiales</p>
+        <div class="header-container">
+            <img src="https://i.imgur.com/vHqY71Z.jpg" alt="Logo AMP" class="logo-amp" onerror="this.style.display='none'">
+            <h1>Gestión Institucional AMP</h1>
+            <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
+        </div>
     </header>
 
     <div class="container">
         <section class="portal-verificador">
             <h3>Verificación de Afiliados</h3>
             
-            <div class="form-grupo" id="grupoArchivo">
-                <label style="color: #004a99;">1. Seleccione el archivo afiliados.csv de su PC:</label>
-                <input type="file" id="archivo_csv" accept=".csv" onchange="cargarPlanilla(this)">
-            </div>
-            
-            <form id="formVerificador" onsubmit="buscarAfiliado(event)" style="display:none;">
+            <div id="statusIndicator" class="estado-carga cargando">🔄 Conectando con el padrón...</div>
+
+            <form id="formVerificador" onsubmit="buscarAfiliado(event)">
                 <div class="form-grupo">
-                    <label for="dni_buscado">2. Ingrese el DNI del Afiliado:</label>
-                    <input type="text" id="dni_buscado" placeholder="Ej: 35123456" required autocomplete="off">
+                    <label for="dni_buscado" style="color: #444;">Ingrese el DNI del cliente:</label>
+                    <input type="text" id="dni_buscado" inputmode="numeric" pattern="[0-9]*" placeholder="Ej: 40873993" required autocomplete="off" disabled>
                 </div>
-                <button type="submit" class="btn-verificar">Consultar Estado</button>
+                <button type="submit" id="btnSubmit" class="btn-verificar" disabled>Consultar Estado</button>
             </form>
         </section>
 
         <section class="portal-grid">
             <div class="card">
                 <h3>Trámites Administrativos</h3>
-                <p>Formularios de reclamos y fichas de afiliación.</p>
-                <a href="http://www.amplar.org.ar/index.php">Ir a Gestión ↗️</a>
+                <p>Formularios de reclamos y fichas de afiliación oficial.</p>
+                <a href="http://www.amplar.org.ar/index.php" target="_blank">Ir a Gestión ↗️</a>
             </div>
             <div class="card">
                 <h3>Centro de Documentación</h3>
-                <p>Anteproyecto, estatutos y resoluciones oficiales.</p>
-                <a href="http://www.amplar.org.ar/index.php">Ver Documentos ↗️</a>
+                <p>Anteproyecto, estatutos y resoluciones emitidas.</p>
+                <a href="http://www.amplar.org.ar/index.php" target="_blank">Ver Documentos ↗️</a>
             </div>
             <div class="card">
                 <h3>Contacto Gremial</h3>
-                <p>Información de sedes y comunicación directa.</p>
-                <a href="http://www.amplar.org.ar/index.php">Contactar ↗️</a>
+                <p>Información de sedes y comunicación permanente.</p>
+                <a href="http://www.amplar.org.ar/index.php" target="_blank">Contactar ↗️</a>
             </div>
         </section>
     </div>
+
+    <footer class="pie-logos">
+        <div class="logos-container">
+            <img src="https://i.imgur.com/vHqY71Z.jpg" alt="Logo AMP" class="logo-footer">
+            <img src="https://i.imgur.com/B9O08y4.jpg" alt="Logos Centrales Obreras" class="logo-footer">
+        </div>
+    </footer>
 
     <div id="modalResultado" class="modal-overlay">
         <div id="modalContent" class="modal-content"></div>
@@ -163,44 +232,47 @@
 
     <script>
         let lineasPlanilla = [];
-        let separador = ','; // Por defecto comas
+        let separador = ',';
 
-        function cargarPlanilla(input) {
-            const archivo = input.files[0];
-            if (!archivo) return;
-
-            const lector = new FileReader();
-            lector.onload = function(e) {
-                const contenido = e.target.result;
-                lineasPlanilla = contenido.split(/\r?\n/);
-                
-                // DETECCIÓN AUTOMÁTICA DEL SEPARADOR (Coma o Punto y Coma)
-                if (lineasPlanilla.length > 0) {
-                    const primeraLinea = lineasPlanilla[0];
-                    if (primeraLinea.includes(';')) {
-                        separador = ';';
-                    } else {
-                        separador = ',';
+        // ACCIÓN AUTOMÁTICA: Lee directamente el archivo subido en tu GitHub
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlPlanilla = 'afiliados.csv'; // Al estar en la misma carpeta, se lee de forma directa y transparente
+            
+            fetch(urlPlanilla)
+                .then(response => {
+                    if (!response.ok) throw new Error("No se pudo encontrar el archivo afiliados.csv");
+                    return response.text();
+                })
+                .then(contenido => {
+                    lineasPlanilla = contenido.split(/\r?\n/);
+                    
+                    // Detectar automáticamente el separador de Excel
+                    if (lineasPlanilla.length > 0) {
+                        separador = lineasPlanilla[0].includes(';') ? ';' : ',';
                     }
-                }
-                
-                document.getElementById('grupoArchivo').style.display = 'none';
-                document.getElementById('formVerificador').style.display = 'block';
-                document.getElementById('dni_buscado').focus();
-            };
-            lector.readAsText(archivo, 'UTF-8');
-        }
+                    
+                    // Habilitar la interfaz de forma inmediata
+                    document.getElementById('statusIndicator').className = 'estado-carga listo';
+                    document.getElementById('dni_buscado').disabled = false;
+                    document.getElementById('btnSubmit').disabled = false;
+                    document.getElementById('dni_buscado').focus();
+                })
+                .catch(error => {
+                    console.error(error);
+                    const indicator = document.getElementById('statusIndicator');
+                    indicator.className = 'estado-carga error';
+                    indicator.innerText = '❌ Error: Asegúrate de que afiliados.csv esté subido en tu GitHub';
+                });
+        });
 
         function buscarAfiliado(event) {
             event.preventDefault();
-            
             const dniBuscado = document.getElementById('dni_buscado').value.replace(/[^0-9]/g, '');
             let encontrado = false;
             
             for (let i = 1; i < lineasPlanilla.length; i++) {
                 if (!lineasPlanilla[i].trim()) continue;
                 
-                // Usamos el separador detectado automáticamente
                 const columnas = lineasPlanilla[i].split(separador);
                 if (columnas.length < 4) continue;
                 
@@ -209,7 +281,6 @@
                 if (dniCSV === dniBuscado) {
                     const apellidos = columnas[1].replace(/"/g, '').trim();
                     const nombres = columnas[2].replace(/"/g, '').trim();
-                    
                     mostrarModal('valido', `${nombres} ${apellidos}`, dniBuscado);
                     encontrado = true;
                     break;
@@ -229,25 +300,25 @@
             if (estado === 'valido') {
                 content.innerHTML = `
                     <div class="modal-icono">✅</div>
-                    <div class="modal-titulo">¡Afiliado Habilitado!</div>
+                    <div class="modal-titulo" style="color: #28a745;">Afiliado Encontrado</div>
                     <div class="modal-datos">
                         <p><strong>Nombre:</strong> ${nombreCompleto}</p>
                         <p><strong>DNI:</strong> ${dni}</p>
-                        <p><strong>Estado:</strong> <span style="color:#28a745; font-weight:bold;">Al Día</span></p>
+                        <p><strong>Estado:</strong> <span style="color:#28a745; font-weight:bold;">Registrado</span></p>
                     </div>
-                    <button class="btn-cerrar" onclick="cerrarModal()">Entendido</button>
+                    <button class="btn-cerrar" style="background-color: #28a745;" onclick="cerrarModal()">Entendido</button>
                 `;
             } else {
                 content.innerHTML = `
                     <div class="modal-icono">⚠️</div>
-                    <div class="modal-titulo">Atención Comercio</div>
+                    <div class="modal-titulo" style="color: #dc3545;">Atención Comercio</div>
                     <div class="modal-datos">
                         <div class="mensaje-critico">No registrado</div>
-                        <p style="color: #666; margin-bottom: 10px;">DNI consultado: <strong>${dni}</strong></p>
-                        <hr style="border: 0; border-top: 1px dashed #f5c6cb; margin: 10px 0;">
-                        <p style="font-weight: bold; font-size: 16px;">Llamar a administración</p>
+                        <p style="color: #666; margin-bottom: 12px; font-size: 14px;">DNI consultado: <strong>${dni}</strong></p>
+                        <hr style="border: 0; border-top: 1px dashed #f5c6cb; margin: 12px 0;">
+                        <p style="font-weight: bold; font-size: 16px; color: #dc3545; margin: 5px 0;">📞 Llamar a administración</p>
                     </div>
-                    <button class="btn-cerrar" onclick="cerrarModal()">Entendido</button>
+                    <button class="btn-cerrar" style="background-color: #dc3545;" onclick="cerrarModal()">Entendido</button>
                 `;
             }
             modal.style.display = 'flex';

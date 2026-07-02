@@ -21,7 +21,6 @@
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
             margin: 0; 
-            /* Fondo limpio usando tus recursos originales */
             background-color: var(--gris-fondo);
             color: var(--texto-oscuro); 
             min-height: 100vh;
@@ -179,8 +178,8 @@
         .status-pausa .modal-datos { border-left-color: var(--naranja); background-color: #fffbeb; }
         
         .status-invalido { color: #dc3545; }
-        .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; text-align: center; }
-        .status-invalido .mensaje-critico { font-size: 22px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; }
+        .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; }
+        .status-invalido .mensaje-critico { font-size: 22px; color: #dc3545; font-weight: bold; margin: 5px 0 12px 0; text-align: center;}
     </style>
 </head>
 <body>
@@ -243,8 +242,6 @@
             const indicator = document.getElementById('statusIndicator');
             indicator.className = 'estado-padrón cargando';
 
-            // Intentamos cargar la URL de GitHub ignorando la caché.
-            // Si el archivo está en tu mismo repositorio, llamarlo de forma relativa es lo más seguro.
             fetch('Afiliados.csv?v=' + timestamp)
                 .then(res => { 
                     if(!res.ok) throw new Error(); 
@@ -252,7 +249,6 @@
                 })
                 .then(data => procesarContenido(data))
                 .catch(() => {
-                    // Intento alternativo por si está guardado en minúsculas en GitHub
                     fetch('afiliados.csv?v=' + timestamp)
                         .then(res => res.text())
                         .then(data => procesarContenido(data))
@@ -277,7 +273,7 @@
         function buscarAfiliado(event) {
             event.preventDefault();
             const dniBuscado = document.getElementById('dni_buscado').value.replace(/[^0-9]/g, '');
-            let afiliadoEncontrado = null;
+            let coincidencias = [];
             
             for (let i = 1; i < lineasPlanilla.length; i++) {
                 if (!lineasPlanilla[i].trim()) continue;
@@ -290,24 +286,28 @@
                 if (dniCSV === dniBuscado) {
                     const apellidos = columnas[1] ? columnas[1].replace(/"/g, '').trim() : '';
                     const nombres = columnas[2] ? columnas[2].replace(/"/g, '').trim() : '';
-                    const estado = columnas[4] ? columnas[4].replace(/"/g, '').trim() : 'Activo';
+                    const estado = columnas[4] ? columnas[4].replace(/"/g, '').replace(/\r/g, '').trim() : 'Activo';
                     
-                    afiliadoEncontrado = {
+                    coincidencias.push({
                         nombreCompleto: `${nombres} ${apellidos}`,
                         dni: dniBuscado,
                         estado: estado
-                    };
-                    break;
+                    });
                 }
             }
             
-            if (afiliadoEncontrado) {
+            if (coincidencias.length > 0) {
+                // PRIORIZACIÓN INTELIGENTE: Si hay duplicados, se eligen estados restrictivos primero (Baja o Pausa)
+                let afiliadoEncontrado = coincidencias.find(c => c.estado === 'Baja') || 
+                                         coincidencias.find(c => c.estado === 'Pausa') || 
+                                         coincidencias[0];
+
                 if (afiliadoEncontrado.estado === 'Activo') {
                     mostrarModal('valido', afiliadoEncontrado.nombreCompleto, afiliadoEncontrado.dni, 'Activo');
                 } else if (afiliadoEncontrado.estado === 'Pausa') {
                     mostrarModal('pausa', afiliadoEncontrado.nombreCompleto, afiliadoEncontrado.dni, 'Pausa (Con Deuda)');
                 } else if (afiliadoEncontrado.estado === 'Baja') {
-                    mostrarModal('invalido', null, dniBuscado, 'Baja');
+                    mostrarModal('invalido', afiliadoEncontrado.nombreCompleto, dniBuscado, 'Baja');
                 }
             } else {
                 mostrarModal('invalido', null, dniBuscado, 'No registrado');
@@ -343,10 +343,10 @@
                         <p><strong>Nombre:</strong> ${nombreCompleto}</p>
                         <p><strong>DNI:</strong> ${dni}</p>
                         <p><strong>Estado:</strong> <span style="color:var(--naranja); font-weight:bold;">${estadoTexto}</span></p>
-                        <p style="font-size: 13px; color: #666; margin-top: 10px;">El servicio se encuentra suspendido temporalmente.</p>
+                        <p style="font-size: 14px; color: #b47d00; font-weight: bold; margin-top: 15px; text-align: center;">⚠️ El afiliado debe comunicarse con Secretaría Administrativa para regularizar su situación.</p>
                     </div>
                     <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp" style="background-color: var(--naranja); color: black;">
-                        💬 Informes secretaría administrativa
+                        💬 Comunicarse con Sec. Administrativa
                     </a>
                     <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
                 `;
@@ -354,18 +354,25 @@
             else {
                 content.className = 'modal-content status-invalido';
                 const motivoLabel = estadoTexto === 'Baja' ? 'Dado de Baja' : 'No registrado';
-                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón y figura como ${motivoLabel}. Solicito verificación de afiliación.`);
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón y figura como ${motivoLabel}. Solicito verificación.`);
                 const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
+
+                let datosHtml = '';
+                if(nombreCompleto) {
+                    datosHtml += `<p><strong>Nombre:</strong> ${nombreCompleto}</p>`;
+                }
+                datosHtml += `<p><strong>DNI:</strong> ${dni}</p>`;
+                datosHtml += `<p style="font-size: 14px; color: #dc3545; font-weight: bold; margin-top: 15px; text-align: center;">⚠️ Operación no autorizada. Comunicarse con Secretaría Administrativa.</p>`;
 
                 content.innerHTML = `
                     <div class="modal-icono">⚠️</div>
                     <div class="modal-titulo" style="color: #dc3545;">Atención Comercio</div>
                     <div class="modal-datos">
                         <div class="mensaje-critico">${motivoLabel}</div>
-                        <p style="color: #666; margin-bottom: 5px; font-size: 14px;">El DNI <strong>${dni}</strong> no se encuentra autorizado en la base de datos oficial.</p>
+                        ${datosHtml}
                     </div>
-                    <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp">
-                        💬 Informes secretaría administrativa
+                    <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp" style="background-color: #dc3545;">
+                        💬 Comunicarse con Sec. Administrativa
                     </a>
                     <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
                 `;

@@ -21,36 +21,22 @@
             color: var(--texto-oscuro); 
         }
         
-        /* CABECERA INSTITUCIONAL */
         header { 
             background: var(--azul-principal); 
             color: var(--blanco); 
-            padding: 30px 20px; 
+            padding: 40px 20px; 
             text-align: center; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
-        .header-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .logo-amp {
-            max-width: 180px;
-            height: auto;
-            background: var(--blanco);
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
         header h1 { 
-            margin: 5px 0 0 0; 
-            font-size: 26px; 
+            margin: 0; 
+            font-size: 28px; 
             font-weight: 700;
         }
         header p { 
-            margin: 8px 0 0 0; 
+            margin: 10px 0 0 0; 
             opacity: 0.9; 
-            font-size: 15px;
+            font-size: 16px;
         }
         
         .container { 
@@ -60,7 +46,6 @@
             box-sizing: border-box;
         }
         
-        /* MÓDULO VERIFICADOR */
         .portal-verificador { 
             background: var(--blanco); 
             padding: 40px 30px; 
@@ -118,7 +103,6 @@
         .btn-verificar:hover { background: var(--azul-oscuro); }
         .btn-verificar:disabled { background: #cccccc; cursor: not-allowed; box-shadow: none; }
         
-        /* ALERTAS DE CONEXIÓN DEL PADRÓN */
         .estado-padrón {
             font-size: 14px;
             font-weight: bold;
@@ -131,7 +115,6 @@
         .error { background-color: #f8d7da; color: #721c24; }
         .listo { display: none; }
 
-        /* ENLACES INFERIORES */
         .portal-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -147,13 +130,9 @@
             border: 1px solid rgba(0,0,0,0.03);
         }
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
+        .card p { color: #555; font-size: 14px; line-height: 1.5; }
         .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
 
-        /* SECCIÓN DE LOGOS PIE */
-        .pie-logos { background: var(--blanco); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 40px; }
-        .logo-footer { max-width: 100%; height: auto; max-height: 50px; opacity: 0.9;}
-
-        /* VENTANA EMERGENTE (MODAL) */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;
         }
@@ -177,7 +156,6 @@
 
     <header>
         <div class="header-container">
-            <img src="logo-amp.jpg" alt="Logo AMP" class="logo-amp">
             <h1>Gestión Institucional AMP</h1>
             <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
         </div>
@@ -217,10 +195,6 @@
         </section>
     </div>
 
-    <footer class="pie-logos">
-        <img src="logos-pie.jpeg" alt="Logos Centrales Obreras" class="logo-footer">
-    </footer>
-
     <div id="modalResultado" class="modal-overlay">
         <div id="modalContent" class="modal-content"></div>
     </div>
@@ -229,32 +203,50 @@
         let lineasPlanilla = [];
         let separador = ',';
 
+        // Intentar cargar el archivo probando variaciones de nombre de forma inteligente
         window.addEventListener('DOMContentLoaded', () => {
-            // Corregido para que busque exactamente "Afiliados.csv" con la A mayúscula como lo tienes tú
-            fetch('Afiliados.csv')
-                .then(response => {
-                    if (!response.ok) throw new Error("Archivo no encontrado");
-                    return response.text();
-                })
-                .then(contenido => {
-                    lineasPlanilla = contenido.split(/\r?\n/);
-                    
-                    if (lineasPlanilla.length > 0) {
-                        separador = lineasPlanilla[0].includes(';') ? ';' : ',';
-                    }
-                    
-                    document.getElementById('statusIndicator').className = 'estado-padrón listo';
-                    document.getElementById('dni_buscado').disabled = false;
-                    document.getElementById('btnSubmit').disabled = false;
-                    document.getElementById('dni_buscado').focus();
-                })
-                .catch(error => {
-                    console.error(error);
-                    const indicator = document.getElementById('statusIndicator');
-                    indicator.className = 'estado-padrón error';
-                    indicator.innerText = '❌ Error: Asegúrate de que "Afiliados.csv" esté en tu GitHub.';
-                });
+            const archivosAProbar = ['afiliados.csv', 'Afiliados.csv', 'AFILIADOS.CSV'];
+            let exito = false;
+
+            function intentarCargar(index) {
+                if (index >= archivosAProbar.length) {
+                    if (!exito) mostrarErrorSincronizacion();
+                    return;
+                }
+
+                fetch(archivosAProbar[index])
+                    .then(response => {
+                        if (!response.ok) throw new Error("No encontrado");
+                        return response.text();
+                    })
+                    .then(contenido => {
+                        lineasPlanilla = contenido.split(/\r?\n/);
+                        if (lineasPlanilla.length > 0) {
+                            separador = lineasPlanilla[0].includes(';') ? ';' : ',';
+                        }
+                        exito = true;
+                        activarBuscador();
+                    })
+                    .catch(() => {
+                        intentarCargar(index + 1);
+                    });
+            }
+
+            intentarCargar(0);
         });
+
+        function activarBuscador() {
+            document.getElementById('statusIndicator').className = 'estado-padrón listo';
+            document.getElementById('dni_buscado').disabled = false;
+            document.getElementById('btnSubmit').disabled = false;
+            document.getElementById('dni_buscado').focus();
+        }
+
+        function mostrarErrorSincronizacion() {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.className = 'estado-padrón error';
+            indicator.innerText = '❌ Error de lectura: No se encuentra la planilla en el servidor.';
+        }
 
         function buscarAfiliado(event) {
             event.preventDefault();

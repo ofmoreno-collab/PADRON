@@ -32,13 +32,47 @@
         header { 
             background: var(--azul-principal); 
             color: var(--blanco); 
-            padding: 40px 20px; 
+            padding: 30px 20px; 
             text-align: center; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
+
+        /* Contenedor del encabezado para alinear el logo de forma sutil */
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        /* Estilos sutiles para el Logo de AMP */
+        .header-logo {
+            height: 65px;
+            width: auto;
+            background-color: var(--blanco);
+            padding: 4px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
         header h1 { margin: 0; font-size: 28px; font-weight: 700; }
-        header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 16px; }
+        header p { margin: 6px 0 0 0; opacity: 0.9; font-size: 16px; }
         
+        /* Ajuste responsivo para pantallas pequeñas */
+        @media (max-width: 600px) {
+            .header-content { flex-direction: column; text-align: center; gap: 12px; }
+            .header-text { text-align: center; }
+            header h1 { font-size: 24px; }
+            header p { font-size: 14px; }
+        }
+
         .container { 
             max-width: 1000px; 
             margin: 30px auto; 
@@ -46,14 +80,17 @@
             box-sizing: border-box;
         }
         
+        /* CUADRO DE VERIFICACIÓN MUCHO MÁS TRANSPARENTE */
         .portal-verificador { 
-            background: var(--blanco); 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 40px 30px; 
             border-radius: 12px; 
             max-width: 520px; 
             margin: 0 auto 40px auto; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            border: 1px solid rgba(255,255,255,0.5);
             text-align: center;
         }
         .portal-verificador h3 { color: var(--azul-principal); margin-top: 0; font-size: 22px; font-weight: 600; }
@@ -68,7 +105,7 @@
             border-radius: 6px; 
             box-sizing: border-box; 
             font-size: 16px; 
-            background-color: #fafafa;
+            background-color: rgba(255, 255, 255, 0.7);
         }
         
         .btn-verificar { 
@@ -92,10 +129,33 @@
         .listo { display: none; }
 
         .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
-        .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03); }
+        .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+        
+        /* Estilos específicos para las tarjetas interactivas con imágenes/gifs */
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+        }
+        .card-media {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        /* El GIF queda cubriendo el espacio de manera más inmersiva */
+        .card-media-gif {
+            object-fit: cover;
+        }
+
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
-        .card p { color: #555; font-size: 14px; line-height: 1.5; }
-        .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
+        .card p { color: #555; font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
+        .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: auto;}
 
         /* MODAL EMERGENTE */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; }
@@ -137,9 +197,13 @@
 <body>
 
     <header>
-        <div class="header-container">
-            <h1>Gestión Institucional AMP</h1>
-            <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
+        <div class="header-content">
+            <img src="logogifamp.gif" alt="Logo AMP" class="header-logo">
+            
+            <div class="header-text">
+                <h1>Gestión Institucional AMP</h1>
+                <p>Asociación de Maestras/os y Profesoras/es de La Rioja</p>
+            </div>
         </div>
     </header>
 
@@ -159,16 +223,16 @@
         </section>
 
         <section class="portal-grid">
-            <div class="card">
-                <h3>Trámites Administrativos</h3>
-                <p>Formularios de reclamos y fichas de afiliación oficial.</p>
-                <a href="http://www.amplar.org.ar/index.php" target="_blank">Ir a Gestión ↗️</a>
-            </div>
-            <div class="card">
-                <h3>Centro de Documentación</h3>
-                <p>Anteproyecto, estatutos y resoluciones emitidas.</p>
-                <a href="http://www.amplar.org.ar/index.php" target="_blank">Ver Documentos ↗️</a>
-            </div>
+            <a href="https://www.youtube.com/@fermoreno5056/featured" target="_blank" class="card card-link">
+                <img src="Intro la voz docente (1).gif" alt="Intro la voz docente" class="card-media card-media-gif">
+                <span style="color: var(--azul-principal); font-weight: bold; margin-top: auto;">Ir a la Voz Docente ↗️</span>
+            </a>
+
+            <a href="https://www.facebook.com/amp.larioja.71" target="_blank" class="card card-link">
+                <img src="logogifamp.gif" alt="Perfil AMP La Rioja" class="card-media">
+                <span style="color: var(--azul-principal); font-weight: bold; margin-top: auto;">Facebook Institucional ↗️</span>
+            </a>
+
             <div class="card">
                 <h3>Contacto Gremial</h3>
                 <p>Información de sedes y comunicación permanente.</p>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Gestión - AMP</title>
+    <style>
+        :root { --azul-principal: #004a99; --blanco: #ffffff; --gris: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--gris); color: #333; }
+        
+        header { background: var(--azul-principal); color: var(--blanco); padding: 40px 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 28px; }
+        header p { margin: 10px 0 0 0; opacity: 0.9; }
+        
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        
+        /* Módulo Verificador */
+        .portal-verificador { 
+            background: var(--blanco); 
+            padding: 40px 30px; 
+            border-radius: 10px; 
+            max-width: 500px; 
+            margin: 0 auto 40px auto; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        .portal-verificador h3 { color: var(--azul-principal); margin-top: 0; text-align: center; font-size: 22px; }
+        
+        .form-grupo { margin-bottom: 20px; }
+        .form-grupo label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .form-grupo input[type="text"], .form-grupo input[type="file"] { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+        
+        .btn-verificar { 
+            width: 100%; 
+            background: var(--azul-principal); 
+            color: var(--blanco); 
+            border: none; 
+            padding: 14px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .btn-verificar:hover { background: #003366; }
+        
+        /* Enlaces Inferiores */
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .card { background: var(--blanco); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card a { display: block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px; }
+
+        /* --- VENTANA EMERGENTE (MODAL) --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: var(--blanco);
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: entradaModal 0.3s ease-out;
+        }
+        @keyframes entradaModal {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-icono { font-size: 55px; margin-bottom: 15px; }
+        .modal-titulo { font-size: 22px; font-weight: bold; margin-bottom: 15px; }
+        .modal-datos { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: left; 
+            margin-bottom: 20px;
+            border-left: 5px solid var(--azul-principal);
+        }
+        .modal-datos p { margin: 6px 0; font-size: 15px; }
+        .btn-cerrar {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-cerrar:hover { background: #5a6268; }
+        
+        .status-valido { color: #155724; }
+        .status-valido .modal-datos { border-left-color: #28a745; background-color: #f4faf6; }
+        
+        .status-invalido { color: #dc3545; }
+        .status-invalido .modal-datos { border-left-color: #dc3545; background-color: #fdf5f6; text-align: center; }
+        .status-invalido .mensaje-critico { font-size: 18px; color: #dc3545; font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Gestión Institucional AMP</h1>
+        <p>Portal administrativo y acceso a recursos oficiales</p>
+    </header>
+
+    <div class="container">
+        <section class="portal-verificador">
+            <h3>Verificación de Afiliados</h3>
+            
+            <div class="form-grupo" id="grupoArchivo">
+                <label style="color: #004a99;">1. Seleccione el archivo afiliados.csv de su PC:</label>
+                <input type="file" id="archivo_csv" accept=".csv" onchange="cargarPlanilla(this)">
+            </div>
+            
+            <form id="formVerificador" onsubmit="buscarAfiliado(event)" style="display:none;">
+                <div class="form-grupo">
+                    <label for="dni_buscado">2. Ingrese el DNI del Afiliado:</label>
+                    <input type="text" id="dni_buscado" placeholder="Ej: 35123456" required autocomplete="off">
+                </div>
+                <button type="submit" class="btn-verificar">Consultar Estado</button>
+            </form>
+        </section>
+
+        <section class="portal-grid">
+            <div class="card">
+                <h3>Trámites Administrativos</h3>
+                <p>Formularios de reclamos y fichas de afiliación.</p>
+                <a href="http://www.amplar.org.ar/index.php">Ir a Gestión ↗️</a>
+            </div>
+            <div class="card">
+                <h3>Centro de Documentación</h3>
+                <p>Anteproyecto, estatutos y resoluciones oficiales.</p>
+                <a href="http://www.amplar.org.ar/index.php">Ver Documentos ↗️</a>
+            </div>
+            <div class="card">
+                <h3>Contacto Gremial</h3>
+                <p>Información de sedes y comunicación directa.</p>
+                <a href="http://www.amplar.org.ar/index.php">Contactar ↗️</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="modalResultado" class="modal-overlay">
+        <div id="modalContent" class="modal-content"></div>
+    </div>
+
+    <script>
+        let lineasPlanilla = [];
+        let separador = ','; // Por defecto comas
+
+        function cargarPlanilla(input) {
+            const archivo = input.files[0];
+            if (!archivo) return;
+
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                const contenido = e.target.result;
+                lineasPlanilla = contenido.split(/\r?\n/);
+                
+                // DETECCIÓN AUTOMÁTICA DEL SEPARADOR (Coma o Punto y Coma)
+                if (lineasPlanilla.length > 0) {
+                    const primeraLinea = lineasPlanilla[0];
+                    if (primeraLinea.includes(';')) {
+                        separador = ';';
+                    } else {
+                        separador = ',';
+                    }
+                }
+                
+                document.getElementById('grupoArchivo').style.display = 'none';
+                document.getElementById('formVerificador').style.display = 'block';
+                document.getElementById('dni_buscado').focus();
+            };
+            lector.readAsText(archivo, 'UTF-8');
+        }
+
+        function buscarAfiliado(event) {
+            event.preventDefault();
+            
+            const dniBuscado = document.getElementById('dni_buscado').value.replace(/[^0-9]/g, '');
+            let encontrado = false;
+            
+            for (let i = 1; i < lineasPlanilla.length; i++) {
+                if (!lineasPlanilla[i].trim()) continue;
+                
+                // Usamos el separador detectado automáticamente
+                const columnas = lineasPlanilla[i].split(separador);
+                if (columnas.length < 4) continue;
+                
+                const dniCSV = columnas[3].replace(/[^0-9]/g, '');
+                
+                if (dniCSV === dniBuscado) {
+                    const apellidos = columnas[1].replace(/"/g, '').trim();
+                    const nombres = columnas[2].replace(/"/g, '').trim();
+                    
+                    mostrarModal('valido', `${nombres} ${apellidos}`, dniBuscado);
+                    encontrado = true;
+                    break;
+                }
+            }
+            
+            if (!encontrado) {
+                mostrarModal('invalido', null, dniBuscado);
+            }
+        }
+
+        function mostrarModal(estado, nombreCompleto, dni) {
+            const modal = document.getElementById('modalResultado');
+            const content = document.getElementById('modalContent');
+            content.className = 'modal-content status-' + estado;
+            
+            if (estado === 'valido') {
+                content.innerHTML = `
+                    <div class="modal-icono">✅</div>
+                    <div class="modal-titulo">¡Afiliado Habilitado!</div>
+                    <div class="modal-datos">
+                        <p><strong>Nombre:</strong> ${nombreCompleto}</p>
+                        <p><strong>DNI:</strong> ${dni}</p>
+                        <p><strong>Estado:</strong> <span style="color:#28a745; font-weight:bold;">Al Día</span></p>
+                    </div>
+                    <button class="btn-cerrar" onclick="cerrarModal()">Entendido</button>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="modal-icono">⚠️</div>
+                    <div class="modal-titulo">Atención Comercio</div>
+                    <div class="modal-datos">
+                        <div class="mensaje-critico">No registrado</div>
+                        <p style="color: #666; margin-bottom: 10px;">DNI consultado: <strong>${dni}</strong></p>
+                        <hr style="border: 0; border-top: 1px dashed #f5c6cb; margin: 10px 0;">
+                        <p style="font-weight: bold; font-size: 16px;">Llamar a administración</p>
+                    </div>
+                    <button class="btn-cerrar" onclick="cerrarModal()">Entendido</button>
+                `;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalResultado').style.display = 'none';
+            document.getElementById('dni_buscado').value = '';
+            document.getElementById('dni_buscado').focus();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalResultado');
+            if (event.target == modal) cerrarModal();
+        }
+    </script>
+</body>
+</html>

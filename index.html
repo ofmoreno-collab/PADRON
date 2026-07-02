@@ -19,8 +19,14 @@
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
             margin: 0; 
-            background-color: var(--gris-fondo); 
+            /* Configuración del GIF de fondo constante, centrado y cubriendo toda la pantalla */
+            background-image: linear-gradient(rgba(244, 246, 249, 0.85), rgba(244, 246, 249, 0.85)), url('https://raw.githubusercontent.com/ofmoreno-collab/PADRON/main/Intro%20la%20voz%20docente%20(1).gif');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
             color: var(--texto-oscuro); 
+            min-height: 100vh;
         }
         
         header { 
@@ -46,7 +52,7 @@
             border-radius: 12px; 
             max-width: 520px; 
             margin: 0 auto 40px auto; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
             border: 1px solid rgba(0,0,0,0.05);
             text-align: center;
         }
@@ -86,7 +92,7 @@
         .listo { display: none; }
 
         .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
-        .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.03); }
+        .card { background: var(--blanco); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03); }
         .card h3 { margin-top: 0; color: var(--azul-principal); font-size: 18px;}
         .card p { color: #555; font-size: 14px; line-height: 1.5; }
         .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
@@ -182,7 +188,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             const timestamp = new Date().getTime();
             
-            // Hemos añadido de manera explícita la ruta con las comillas codificadas al principio de la lista
             const archivosAIntentar = [
                 '%22Afiliados.csv%22', 
                 'Afiliados.csv',       
@@ -211,7 +216,11 @@
                     });
             }
 
-            intentarCargar();
+            try {
+                intentarCargar();
+            } catch(e) {
+                console.error(e);
+            }
         });
 
         function procesarContenido(contenido) {
@@ -236,7 +245,6 @@
                 const columnas = lineasPlanilla[i].split(separador);
                 if (columnas.length < 4) continue;
                 
-                // Limpieza extra: Quitamos cualquier comilla que pueda venir dentro del CSV en la columna de DNI
                 const dniCSV = columnas[3].replace(/[^0-9]/g, '');
                 
                 if (dniCSV === dniBuscado) {

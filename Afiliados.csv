@@ -1,206 +1,204 @@
-REGISTRO GENERAL DE PERSONAS;;;
-1;"";"";;Baja
-1;"ÃÂµlvarez Martin";"Paula";27682304;Pausa
-2;"Guerrero GutiÃ¢ÂÂrrez";"Antonio";44183049;Baja
-4;"Ortega Navarro";"Luisa";35456012;Activo
-6;"LÃÂ¢pez MarÃÂ¡n";"Jorge";19777036;Activo
-8;"Castillo Cano";"Carlos";28062224;Activo
-10;"Morales Lozano";"Sara";16158740;Activo
-12;"Ortega Serrano";"Javier";41809429;Activo
-14;"Santos GonzÃÂ lez";"ÃÂµlvaro";39577629;Activo
-16;"MarÃÂ¡n Alonso";"Sara";19667487;Activo
-18;"Lozano Rubio";"Laura";36690463;Activo
-20;"Gil MuÃÂ¤oz";"Juan";43990048;Activo
-22;"SÃÂ nchez GÃÂ¢mez";"Gabriel";37358634;Activo
-24;"GutiÃ¢ÂÂrrez Serrano";"Roberto";19147312;Activo
-26;"Ortega RodrÃÂ¡guez";"Paula";40779828;Activo
-28;"Cano DomÃÂ¡nguez";"Ana";34704436;Activo
-30;"Sanz Cortes";"Eva";32207930;Activo
-32;"Castillo Delgado";"JosÃ¢ÂÂ";27695167;Activo
-34;"Ruiz MartÃÂ¡nez";"Natalia";26458694;Activo
-36;"Cano Martin";"Eva";46025289;Activo
-38;"PÃ¢ÂÂrez Ramos";"Marcos";43995214;Activo
-40;"GutiÃ¢ÂÂrrez Sanz";"Manuel";42196562;Activo
-42;"Medina Garrido";"Alba";16643674;Activo
-44;"ÃÂµlvarez Ortiz";"Alejandro";21767267;Activo
-46;"HernÃÂ ndez Morales";"Ricardo";16790629;Activo
-48;"Medina ÃÂµlvarez";"Fernando";29313645;Activo
-205;"Gutierrez";"Elizabet carolina";33444555;Activo
-NÃÂ¸;"Apellidos";"Nombres";;Activo
-3;"Romero Lozano";"Fernando";40873993;Pausa
-5;"Morales Serrano";"AndrÃ¢ÂÂs";11608588;Activo
-7;"Santos Castro";"RocÃÂ¡o";36954639;Activo
-9;"NÃÂ£ÃÂ¤ez Castillo";"Pablo";14214160;Activo
-11;"Blanco MartÃÂ¡nez";"Ricardo";11316757;Activo
-13;"Gil LÃÂ¢pez";"Marta";48417816;Activo
-15;"HernÃÂ ndez SÃÂ nchez";"AndrÃ¢ÂÂs";12840478;Activo
-17;"MartÃÂ¡nez PÃ¢ÂÂrez";"Valeria";32448032;Activo
-19;"Morales Blanco";"Roberto";47649825;Activo
-21;"GÃÂ¢mez Rubio";"Paula";34762281;Activo
-23;"Delgado DomÃÂ¡nguez";"Hugo";27862058;Activo
-25;"Diaz SÃÂ nchez";"Daniela";25872946;Activo
-27;"Alonso ÃÂµlvarez";"AdriÃÂ n";32831029;Activo
-29;"LÃÂ¢pez SÃÂ nchez";"SofÃÂ¡a";48012855;Activo
-31;"PÃ¢ÂÂrez Sanz";"Marta";29779518;Activo
-33;"SÃÂ nchez Navarro";"Fernando";47015490;Activo
-35;"Prieto PÃ¢ÂÂrez";"RocÃÂ¡o";25825353;Activo
-37;"FernÃÂ ndez GutiÃ¢ÂÂrrez";"AdriÃÂ n";40432717;Activo
-39;"Blanco Castro";"Ricardo";47360592;Activo
-41;"MartÃÂ¡nez Diaz";"Marina";29744217;Activo
-43;"Medina Navarro";"Clara";44882521;Activo
-45;"Castillo Romero";"Natalia";41024100;Activo
-47;"MuÃÂ¤oz VÃÂ zquez";"Luisa";16680044;Activo
-49;"Ortiz Gil";"Pablo";30428269;Activo
-50;"LÃÂ¢pez Garrido";"Clara";49515631;Activo
-51;"GarcÃÂ¡a GonzÃÂ lez";"Irene";22695023;Activo
-52;"JimÃ¢ÂÂnez PÃ¢ÂÂrez";"Carmen";48405618;Activo
-53;"Molina Prieto";"Alba";35862643;Activo
-54;"ÃÂµlvarez Medina";"Ricardo";14221428;Activo
-55;"Moreno Ruiz";"LucÃÂ¡a";19479672;Activo
-56;"Morales Blanco";"Alba";33976442;Activo
-57;"Alonso Ortega";"SofÃÂ¡a";17336961;Activo
-58;"SuÃÂ rez Ruiz";"Javier";39797377;Activo
-59;"MuÃÂ¤oz MarÃÂ¡n";"Ricardo";17428097;Activo
-60;"SÃÂ nchez Sanz";"RocÃÂ¡o";40561284;Activo
-61;"Garrido MarÃÂ¡n";"AdriÃÂ n";33909381;Activo
-62;"RamÃÂ¡rez Castillo";"Alba";35691148;Activo
-63;"MuÃÂ¤oz Castillo";"Marina";25920654;Activo
-64;"RamÃÂ¡rez Guerrero";"Diego";36568718;Activo
-65;"Castro Cortes";"Laura";40744092;Activo
-66;"Iglesias GarcÃÂ¡a";"Marcos";49525921;Activo
-67;"FernÃÂ ndez Diaz";"Antonio";14876321;Activo
-68;"ÃÂµlvarez Iglesias";"Hugo";17162915;Activo
-69;"Navarro Ramos";"Francisco";22988965;Activo
-70;"Guerrero Torres";"Laura";43575466;Activo
-71;"Serrano Martin";"Gabriel";30255787;Activo
-72;"Prieto Ruiz";"Luisa";28080303;Activo
-73;"RodrÃÂ¡guez Ruiz";"Elena";38353586;Activo
-74;"Morales LÃÂ¢pez";"LucÃÂ¡a";12952756;Activo
-75;"Torres GonzÃÂ lez";"Alejandro";44300981;Activo
-76;"SuÃÂ rez Ortega";"Irene";48266422;Activo
-77;"HernÃÂ ndez Ortiz";"MarÃÂ¡a";46192311;Activo
-78;"Sanz Molina";"Luisa";36286647;Activo
-79;"DomÃÂ¡nguez Cano";"Ana";42010809;Activo
-80;"RodrÃÂ¡guez Prieto";"Marta";44077754;Activo
-81;"Alonso GutiÃ¢ÂÂrrez";"Natalia";38229685;Activo
-82;"ÃÂµlvarez Ortiz";"Gonzalo";26563264;Activo
-83;"Gil Rubio";"Daniela";30176451;Activo
-84;"Morales Garrido";"Laura";13063880;Activo
-85;"Ruiz GÃÂ¢mez";"Juan";45568212;Activo
-86;"Alonso Romero";"Jorge";45040342;Activo
-87;"Guerrero Serrano";"Elena";26063575;Activo
-88;"MuÃÂ¤oz Garrido";"Antonio";33479385;Activo
-89;"HernÃÂ ndez VÃÂ zquez";"Eva";26990304;Activo
-90;"SuÃÂ rez ÃÂµlvarez";"Marina";49575650;Activo
-91;"Ortega LÃÂ¢pez";"Ana";49430244;Activo
-92;"HernÃÂ ndez MuÃÂ¤oz";"Juan";29998826;Activo
-93;"FernÃÂ ndez GutiÃ¢ÂÂrrez";"Carlos";34588395;Activo
-94;"Gil HernÃÂ ndez";"Sara";28172011;Activo
-95;"Gil Diaz";"Alba";43665132;Activo
-96;"ÃÂµlvarez VÃÂ zquez";"JosÃ¢ÂÂ";42526450;Activo
-97;"Ortiz PÃ¢ÂÂrez";"Roberto";42131698;Activo
-98;"SÃÂ nchez Ruiz";"Marcos";19996404;Activo
-99;"Gil Cano";"Juan";32202483;Activo
-100;"Alonso Navarro";"JosÃ¢ÂÂ";45734645;Activo
-101;"HernÃÂ ndez Castro";"Pablo";22425340;Activo
-102;"Molina MuÃÂ¤oz";"Beatriz";43143933;Activo
-103;"MartÃÂ¡nez Cortes";"Pedro";16968961;Activo
-104;"SÃÂ nchez RamÃÂ¡rez";"MarÃÂ¡a";49214723;Activo
-105;"Castillo Ortega";"Alicia";48160005;Activo
-106;"Morales Ortiz";"Natalia";30001413;Activo
-107;"Torres Garrido";"Pedro";41189637;Activo
-108;"DomÃÂ¡nguez Guerrero";"Natalia";22947589;Activo
-109;"Diaz Romero";"Fernando";46458122;Activo
-110;"RamÃÂ¡rez Torres";"Gonzalo";42223383;Activo
-111;"Romero Santos";"Ana";31179040;Activo
-112;"Garrido MartÃÂ¡nez";"Santiago";37228320;Activo
-113;"Blanco Romero";"Luisa";21605152;Activo
-114;"GÃÂ¢mez Serrano";"Sara";20787495;Activo
-115;"Iglesias Alonso";"LucÃÂ¡a";24808232;Activo
-116;"Sanz ÃÂµlvarez";"Andrea";36837675;Activo
-117;"Ruiz Garrido";"RocÃÂ¡o";41405229;Activo
-118;"Serrano Iglesias";"Alicia";16710958;Activo
-119;"HernÃÂ ndez Romero";"Ana";17243950;Activo
-120;"Medina Castillo";"Marina";49773873;Activo
-121;"Santos Ruiz";"Santiago";22906163;Activo
-122;"GonzÃÂ lez Cortes";"Natalia";25918260;Activo
-123;"Romero MuÃÂ¤oz";"InÃ¢ÂÂs";44982069;Activo
-124;"Cano Guerrero";"Laura";26499383;Activo
-125;"Torres RamÃÂ¡rez";"LucÃÂ¡a";34612536;Activo
-126;"GutiÃ¢ÂÂrrez Morales";"Gonzalo";43564345;Activo
-127;"Delgado PÃ¢ÂÂrez";"Natalia";30659385;Activo
-128;"Morales MartÃÂ¡nez";"Alicia";38693688;Activo
-129;"ÃÂµlvarez PÃ¢ÂÂrez";"Roberto";49900346;Activo
-130;"MartÃÂ¡nez Romero";"MarÃÂ¡a";22208829;Activo
-131;"Santos Ortega";"Santiago";11153213;Activo
-132;"Moreno Ruiz";"Gonzalo";13838655;Activo
-133;"RamÃÂ¡rez Torres";"Santiago";48938303;Activo
-134;"Delgado Castillo";"Alba";15577405;Activo
-135;"Cortes HernÃÂ ndez";"SofÃÂ¡a";31474501;Activo
-136;"Sanz Gil";"Santiago";23000903;Activo
-137;"Serrano PÃ¢ÂÂrez";"Gonzalo";24281929;Activo
-138;"Martin SuÃÂ rez";"Alejandro";22422346;Activo
-139;"RodrÃÂ¡guez Navarro";"Alejandro";38682443;Activo
-140;"PÃ¢ÂÂrez Ortiz";"Carlos";35811660;Activo
-141;"PÃ¢ÂÂrez MarÃÂ¡n";"Francisco";31377232;Activo
-142;"RamÃÂ¡rez Prieto";"Natalia";47932246;Activo
-143;"Alonso RodrÃÂ¡guez";"Andrea";19649367;Activo
-144;"Guerrero Torres";"Laura";18379608;Activo
-145;"Ortega Moreno";"Elena";38914396;Activo
-146;"Cortes FernÃÂ ndez";"Juan";29817695;Activo
-147;"Romero Medina";"Paula";15441761;Activo
-148;"RodrÃÂ¡guez ÃÂµlvarez";"AdriÃÂ n";40000353;Activo
-149;"Lozano Ortiz";"Irene";36796769;Activo
-150;"NÃÂ£ÃÂ¤ez MuÃÂ¤oz";"Alba";32651113;Activo
-151;"VÃÂ zquez Romero";"Marina";35358060;Activo
-152;"LÃÂ¢pez Delgado";"Carlos";38826861;Activo
-153;"JimÃ¢ÂÂnez MuÃÂ¤oz";"Marina";33602417;Activo
-154;"Sanz Romero";"Gonzalo";22418290;Activo
-155;"GÃÂ¢mez Castro";"Roberto";48722293;Activo
-156;"Navarro Rubio";"Eva";49322878;Activo
-157;"Moreno MuÃÂ¤oz";"Juan";32354690;Activo
-158;"RamÃÂ¡rez Ruiz";"MarÃÂ¡a";38852482;Activo
-159;"Santos VÃÂ zquez";"Beatriz";26959746;Activo
-160;"GarcÃÂ¡a Lozano";"Irene";44847493;Activo
-161;"Navarro Medina";"SofÃÂ¡a";39498636;Activo
-162;"Morales ÃÂµlvarez";"Andrea";33779598;Activo
-163;"GÃÂ¢mez Ortiz";"Pablo";43842448;Activo
-164;"Sanz Navarro";"Carlos";17222547;Activo
-165;"Santos Serrano";"Elena";10319764;Activo
-166;"Moreno Martin";"Valeria";19099029;Activo
-167;"Cortes MarÃÂ¡n";"Roberto";42664855;Activo
-168;"Rubio Martin";"Marcos";19522967;Activo
-169;"HernÃÂ ndez Guerrero";"SofÃÂ¡a";13831577;Activo
-170;"GonzÃÂ lez Blanco";"Alba";42862496;Activo
-171;"Alonso Martin";"Luis";16932260;Activo
-172;"ÃÂµlvarez Martin";"Hugo";38261670;Activo
-173;"LÃÂ¢pez Molina";"Marcos";38362022;Activo
-174;"Castro Iglesias";"RocÃÂ¡o";46151596;Activo
-175;"GutiÃ¢ÂÂrrez SuÃÂ rez";"AndrÃ¢ÂÂs";10897843;Activo
-176;"Delgado Martin";"Valeria";17507256;Activo
-177;"Gil Prieto";"Manuel";27940281;Activo
-178;"JimÃ¢ÂÂnez HernÃÂ ndez";"Beatriz";25654719;Activo
-179;"Santos Serrano";"InÃ¢ÂÂs";33529798;Activo
-180;"Morales Serrano";"Irene";33460167;Activo
-181;"Ortiz RamÃÂ¡rez";"JosÃ¢ÂÂ";10643402;Activo
-182;"DomÃÂ¡nguez Martin";"Miguel";22928846;Activo
-183;"DomÃÂ¡nguez Ruiz";"Luisa";48495567;Activo
-184;"LÃÂ¢pez Torres";"Elena";29286360;Activo
-185;"GutiÃ¢ÂÂrrez Cano";"Clara";35036633;Activo
-186;"RodrÃÂ¡guez GutiÃ¢ÂÂrrez";"Irene";14359002;Activo
-187;"Serrano Garrido";"Valeria";37978076;Activo
-188;"Gil Santos";"Juan";25122271;Activo
-189;"Prieto Moreno";"Santiago";19465695;Activo
-190;"Alonso Santos";"Beatriz";30435300;Activo
-191;"ÃÂµlvarez Alonso";"Alba";47322603;Activo
-192;"Morales VÃÂ zquez";"Francisco";35535339;Activo
-193;"Garrido SÃÂ nchez";"AdriÃÂ n";49239535;Activo
-194;"Delgado Morales";"Sara";36942320;Activo
-195;"Medina Santos";"Jorge";26746357;Activo
-196;"JimÃ¢ÂÂnez GÃÂ¢mez";"ÃÂµlvaro";17592822;Activo
-197;"RodrÃÂ¡guez GonzÃÂ lez";"Eva";20406262;Activo
-198;"GarcÃÂ¡a Iglesias";"Ana";40073718;Activo
-199;"ÃÂµlvarez Castillo";"MarÃÂ¡a";34103290;Activo
-200;"Moreno";"Fernando";33394400;Activo
-201;"Moreno";"Fernando";33394401;Activo
-202;"Manghessi";"Joregelina Yael";33393689;Pausa
+Nro,Apellido,Nombre,DNI,Estado
+1,"ÃÂµlvarez Martin","Paula",27682304,Pausa
+2,"Guerrero GutiÃ¢ÂÂrrez","Antonio",44183049,Baja
+3,"Romero Lozano","Fernando",40873993,Pausa
+4,"Ortega Navarro","Luisa",35456012,Activo
+5,"Morales Serrano","AndrÃ¢ÂÂs",11608588,Activo
+6,"LÃÂ¢pez MarÃÂ¡n","Jorge",19777036,Activo
+7,"Santos Castro","RocÃÂ¡o",36954639,Activo
+8,"Castillo Cano","Carlos",28062224,Activo
+9,"NÃÂ£ÃÂ¤ez Castillo","Pablo",14214160,Activo
+10,"Morales Lozano","Sara",16158740,Activo
+11,"Blanco MartÃÂ¡nez","Ricardo",11316757,Activo
+12,"Ortega Serrano","Javier",41809429,Activo
+13,"Gil LÃÂ¢pez","Marta",48417816,Activo
+14,"Santos GonzÃÂ lez","ÃÂµlvaro",39577629,Activo
+15,"HernÃÂ ndez SÃÂ nchez","AndrÃ¢ÂÂs",12840478,Activo
+16,"MarÃÂ¡n Alonso","Sara",19667487,Activo
+17,"MartÃÂ¡nez PÃ¢ÂÂrez","Valeria",32448032,Activo
+18,"Lozano Rubio","Laura",36690463,Activo
+19,"Morales Blanco","Roberto",47649825,Activo
+20,"Gil MuÃÂ¤oz","Juan",43990048,Activo
+21,"GÃÂ¢mez Rubio","Paula",34762281,Activo
+22,"SÃÂ nchez GÃÂ¢mez","Gabriel",37358634,Activo
+23,"Delgado DomÃÂ¡nguez","Hugo",27862058,Activo
+24,"GutiÃ¢ÂÂrrez Serrano","Roberto",19147312,Activo
+25,"Diaz SÃÂ nchez","Daniela",25872946,Activo
+26,"Ortega RodrÃÂ¡guez","Paula",40779828,Activo
+27,"Alonso ÃÂµlvarez","AdriÃÂ n",32831029,Activo
+28,"Cano DomÃÂ¡nguez","Ana",34704436,Activo
+29,"LÃÂ¢pez SÃÂ nchez","SofÃÂ¡a",48012855,Activo
+30,"Sanz Cortes","Eva",32207930,Activo
+31,"PÃ¢ÂÂrez Sanz","Marta",29779518,Activo
+32,"Castillo Delgado","JosÃ¢ÂÂ",27695167,Activo
+33,"SÃÂ nchez Navarro","Fernando",47015490,Activo
+34,"Ruiz MartÃÂ¡nez","Natalia",26458694,Activo
+35,"Prieto PÃ¢ÂÂrez","RocÃÂ¡o",25825353,Activo
+36,"Cano Martin","Eva",46025289,Activo
+37,"FernÃÂ ndez GutiÃ¢ÂÂrrez","AdriÃÂ n",40432717,Activo
+38,"PÃ¢ÂÂrez Ramos","Marcos",43995214,Activo
+39,"Blanco Castro","Ricardo",47360592,Activo
+40,"GutiÃ¢ÂÂrrez Sanz","Manuel",42196562,Activo
+41,"MartÃÂ¡nez Diaz","Marina",29744217,Activo
+42,"Medina Garrido","Alba",16643674,Activo
+43,"Medina Navarro","Clara",44882521,Activo
+44,"ÃÂµlvarez Ortiz","Alejandro",21767267,Activo
+45,"Castillo Romero","Natalia",41024100,Activo
+46,"HernÃÂ ndez Morales","Ricardo",16790629,Activo
+47,"MuÃÂ¤oz VÃÂ zquez","Luisa",16680044,Activo
+48,"Medina ÃÂµlvarez","Fernando",29313645,Activo
+49,"Ortiz Gil","Pablo",30428269,Activo
+50,"LÃÂ¢pez Garrido","Clara",49515631,Activo
+51,"GarcÃÂ¡a GonzÃÂ lez","Irene",22695023,Activo
+52,"JimÃ¢ÂÂnez PÃ¢ÂÂrez","Carmen",48405618,Activo
+53,"Molina Prieto","Alba",35862643,Activo
+54,"ÃÂµlvarez Medina","Ricardo",14221428,Activo
+55,"Moreno Ruiz","LucÃÂ¡a",19479672,Activo
+56,"Morales Blanco","Alba",33976442,Activo
+57,"Alonso Ortega","SofÃÂ¡a",17336961,Activo
+58,"SuÃÂ rez Ruiz","Javier",39797377,Activo
+59,"MuÃÂ¤oz MarÃÂ¡n","Ricardo",17428097,Activo
+60,"SÃÂ nchez Sanz","RocÃÂ¡o",40561284,Activo
+61,"Garrido MarÃÂ¡n","AdriÃÂ n",33909381,Activo
+62,"RamÃÂ¡rez Castillo","Alba",35691148,Activo
+63,"MuÃÂ¤oz Castillo","Marina",25920654,Activo
+64,"RamÃÂ¡rez Guerrero","Diego",36568718,Activo
+65,"Castro Cortes","Laura",40744092,Activo
+66,"Iglesias GarcÃÂ¡a","Marcos",49525921,Activo
+67,"FernÃÂ ndez Diaz","Antonio",14876321,Activo
+68,"ÃÂµlvarez Iglesias","Hugo",17162915,Activo
+69,"Navarro Ramos","Francisco",22988965,Activo
+70,"Guerrero Torres","Laura",43575466,Activo
+71,"Serrano Martin","Gabriel",30255787,Activo
+72,"Prieto Ruiz","Luisa",28080303,Activo
+73,"RodrÃÂ¡guez Ruiz","Elena",38353586,Activo
+74,"Morales LÃÂ¢pez","LucÃÂ¡a",12952756,Activo
+75,"Torres GonzÃÂ lez","Alejandro",44300981,Activo
+76,"SuÃÂ rez Ortega","Irene",48266422,Activo
+77,"HernÃÂ ndez Ortiz","MarÃÂ¡a",46192311,Activo
+78,"Sanz Molina","Luisa",36286647,Activo
+79,"DomÃÂ¡nguez Cano","Ana",42010809,Activo
+80,"RodrÃÂ¡guez Prieto","Marta",44077754,Activo
+81,"Alonso GutiÃ¢ÂÂrrez","Natalia",38229685,Activo
+82,"ÃÂµlvarez Ortiz","Gonzalo",26563264,Activo
+83,"Gil Rubio","Daniela",30176451,Activo
+84,"Morales Garrido","Laura",13063880,Activo
+85,"Ruiz GÃÂ¢mez","Juan",45568212,Activo
+86,"Alonso Romero","Jorge",45040342,Activo
+87,"Guerrero Serrano","Elena",26063575,Activo
+88,"MuÃÂ¤oz Garrido","Antonio",33479385,Activo
+89,"HernÃÂ ndez VÃÂ zquez","Eva",26990304,Activo
+90,"SuÃÂ rez ÃÂµlvarez","Marina",49575650,Activo
+91,"Ortega LÃÂ¢pez","Ana",49430244,Activo
+92,"HernÃÂ ndez MuÃÂ¤oz","Juan",29998826,Activo
+93,"FernÃÂ ndez GutiÃ¢ÂÂrrez","Carlos",34588395,Activo
+94,"Gil HernÃÂ ndez","Sara",28172011,Activo
+95,"Gil Diaz","Alba",43665132,Activo
+96,"ÃÂµlvarez VÃÂ zquez","JosÃ¢ÂÂ",42526450,Activo
+97,"Ortiz PÃ¢ÂÂrez","Roberto",42131698,Activo
+98,"SÃÂ nchez Ruiz","Marcos",19996404,Activo
+99,"Gil Cano","Juan",32202483,Activo
+100,"Alonso Navarro","JosÃ¢ÂÂ",45734645,Activo
+101,"HernÃÂ ndez Castro","Pablo",22425340,Activo
+102,"Molina MuÃÂ¤oz","Beatriz",43143933,Activo
+103,"MartÃÂ¡nez Cortes","Pedro",16968961,Activo
+104,"SÃÂ nchez RamÃÂ¡rez","MarÃÂ¡a",49214723,Activo
+105,"Castillo Ortega","Alicia",48160005,Activo
+106,"Morales Ortiz","Natalia",30001413,Activo
+107,"Torres Garrido","Pedro",41189637,Activo
+108,"DomÃÂ¡nguez Guerrero","Natalia",22947589,Activo
+109,"Diaz Romero","Fernando",46458122,Activo
+110,"RamÃÂ¡rez Torres","Gonzalo",42223383,Activo
+111,"Romero Santos","Ana",31179040,Activo
+112,"Garrido MartÃÂ¡nez","Santiago",37228320,Activo
+113,"Blanco Romero","Luisa",21605152,Activo
+114,"GÃÂ¢mez Serrano","Sara",20787495,Activo
+115,"Iglesias Alonso","LucÃÂ¡a",24808232,Activo
+116,"Sanz ÃÂµlvarez","Andrea",36837675,Activo
+117,"Ruiz Garrido","RocÃÂ¡o",41405229,Activo
+118,"Serrano Iglesias","Alicia",16710958,Activo
+119,"HernÃÂ ndez Romero","Ana",17243950,Activo
+120,"Medina Castillo","Marina",49773873,Activo
+121,"Santos Ruiz","Santiago",22906163,Activo
+122,"GonzÃÂ lez Cortes","Natalia",25918260,Activo
+123,"Romero MuÃÂ¤oz","InÃ¢ÂÂs",44982069,Activo
+124,"Cano Guerrero","Laura",26499383,Activo
+125,"Torres RamÃÂ¡rez","LucÃÂ¡a",34612536,Activo
+126,"GutiÃ¢ÂÂrrez Morales","Gonzalo",43564345,Activo
+127,"Delgado PÃ¢ÂÂrez","Natalia",30659385,Activo
+128,"Morales MartÃÂ¡nez","Alicia",38693688,Activo
+129,"ÃÂµlvarez PÃ¢ÂÂrez","Roberto",49900346,Activo
+130,"MartÃÂ¡nez Romero","MarÃÂ¡a",22208829,Activo
+131,"Santos Ortega","Santiago",11153213,Activo
+132,"Moreno Ruiz","Gonzalo",13838655,Activo
+133,"RamÃÂ¡rez Torres","Santiago",48938303,Activo
+134,"Delgado Castillo","Alba",15577405,Activo
+135,"Cortes HernÃÂ ndez","SofÃÂ¡a",31474501,Activo
+136,"Sanz Gil","Santiago",23000903,Activo
+137,"Serrano PÃ¢ÂÂrez","Gonzalo",24281929,Activo
+138,"Martin SuÃÂ rez","Alejandro",22422346,Activo
+139,"RodrÃÂ¡guez Navarro","Alejandro",38682443,Activo
+140,"PÃ¢ÂÂrez Ortiz","Carlos",35811660,Activo
+141,"PÃ¢ÂÂrez MarÃÂ¡n","Francisco",31377232,Activo
+142,"RamÃÂ¡rez Prieto","Natalia",47932246,Activo
+143,"Alonso RodrÃÂ¡guez","Andrea",19649367,Activo
+144,"Guerrero Torres","Laura",18379608,Activo
+145,"Ortega Moreno","Elena",38914396,Activo
+146,"Cortes FernÃÂ ndez","Juan",29817695,Activo
+147,"Romero Medina","Paula",15441761,Activo
+148,"RodrÃÂ¡guez ÃÂµlvarez","AdriÃÂ n",40000353,Activo
+149,"Lozano Ortiz","Irene",36796769,Activo
+150,"NÃÂ£ÃÂ¤ez MuÃÂ¤oz","Alba",32651113,Activo
+151,"VÃÂ zquez Romero","Marina",35358060,Activo
+152,"LÃÂ¢pez Delgado","Carlos",38826861,Activo
+153,"JimÃ¢ÂÂnez MuÃÂ¤oz","Marina",33602417,Activo
+154,"Sanz Romero","Gonzalo",22418290,Activo
+155,"GÃÂ¢mez Castro","Roberto",48722293,Activo
+156,"Navarro Rubio","Eva",49322878,Activo
+157,"Moreno MuÃÂ¤oz","Juan",32354690,Activo
+158,"RamÃÂ¡rez Ruiz","MarÃÂ¡a",38852482,Activo
+159,"Santos VÃÂ zquez","Beatriz",26959746,Activo
+160,"GarcÃÂ¡a Lozano","Irene",44847493,Activo
+161,"Navarro Medina","SofÃÂ¡a",39498636,Activo
+162,"Morales ÃÂµlvarez","Andrea",33779598,Activo
+163,"GÃÂ¢mez Ortiz","Pablo",43842448,Activo
+164,"Sanz Navarro","Carlos",17222547,Activo
+165,"Santos Serrano","Elena",10319764,Activo
+166,"Moreno Martin","Valeria",19099029,Activo
+167,"Cortes MarÃÂ¡n","Roberto",42664855,Activo
+168,"Rubio Martin","Marcos",19522967,Activo
+169,"HernÃÂ ndez Guerrero","SofÃÂ¡a",13831577,Activo
+170,"GonzÃÂ lez Blanco","Alba",42862496,Activo
+171,"Alonso Martin","Luis",16932260,Activo
+172,"ÃÂµlvarez Martin","Hugo",38261670,Activo
+173,"LÃÂ¢pez Molina","Marcos",38362022,Activo
+174,"Castro Iglesias","RocÃÂ¡o",46151596,Activo
+175,"GutiÃ¢ÂÂrrez SuÃÂ rez","AndrÃ¢ÂÂs",10897843,Activo
+176,"Delgado Martin","Valeria",17507256,Activo
+177,"Gil Prieto","Manuel",27940281,Activo
+178,"JimÃ¢ÂÂnez HernÃÂ ndez","Beatriz",25654719,Activo
+179,"Santos Serrano","InÃ¢ÂÂs",33529798,Activo
+180,"Morales Serrano","Irene",33460167,Activo
+181,"Ortiz RamÃÂ¡rez","JosÃ¢ÂÂ",10643402,Activo
+182,"DomÃÂ¡nguez Martin","Miguel",22928846,Activo
+183,"DomÃÂ¡nguez Ruiz","Luisa",48495567,Activo
+184,"LÃÂ¢pez Torres","Elena",29286360,Activo
+185,"GutiÃ¢ÂÂrrez Cano","Clara",35036633,Activo
+186,"RodrÃÂ¡guez GutiÃ¢ÂÂrrez","Irene",14359002,Activo
+187,"Serrano Garrido","Valeria",37978076,Activo
+188,"Gil Santos","Juan",25122271,Activo
+189,"Prieto Moreno","Santiago",19465695,Activo
+190,"Alonso Santos","Beatriz",30435300,Activo
+191,"ÃÂµlvarez Alonso","Alba",47322603,Activo
+192,"Morales VÃÂ zquez","Francisco",35535339,Activo
+193,"Garrido SÃÂ nchez","AdriÃÂ n",49239535,Activo
+194,"Delgado Morales","Sara",36942320,Activo
+195,"Medina Santos","Jorge",26746357,Activo
+196,"JimÃ¢ÂÂnez GÃÂ¢mez","ÃÂµlvaro",17592822,Activo
+197,"RodrÃÂ¡guez GonzÃÂ lez","Eva",20406262,Activo
+198,"GarcÃÂ¡a Iglesias","Ana",40073718,Activo
+199,"ÃÂµlvarez Castillo","MarÃÂ¡a",34103290,Activo
+200,"Moreno","Fernando",33394400,Activo
+201,"Moreno","Fernando",33394401,Activo
+202,"Manghessi","Joregelina Yael",33393689,Pausa
+205,"Gutierrez","Elizabet carolina",33444555,Activo

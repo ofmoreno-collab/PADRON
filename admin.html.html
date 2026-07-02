@@ -83,27 +83,6 @@
         .btn-success { background: var(--verde); }
         .btn-success:hover { background: #218838; }
 
-        /* PANTALLA DE LOGIN INTEGRADA */
-        .login-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-principal) 100%);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        /* TABLA DE AFILIADOS */
         .table-container {
             overflow-x: auto;
             margin-top: 20px;
@@ -142,43 +121,35 @@
 </head>
 <body>
 
-    <div id="loginScreen" class="login-overlay">
-        <div class="login-box">
-            <h2 style="margin-bottom: 10px;">🔑 Panel Administrativo AMP</h2>
-            <p style="color:#666; font-size:14px; margin-bottom:25px;">Ingresa tus credenciales de acceso para sincronizar el padrón.</p>
-            <form onsubmit="verificarLogin(event)">
-                <div class="form-group" style="margin-bottom: 15px; text-align: left;">
-                    <label>Usuario del Panel:</label>
-                    <input type="text" id="loginUser" value="amp2026" required autocomplete="off">
-                </div>
-                <div class="form-group" style="margin-bottom: 25px; text-align: left;">
-                    <label>Contraseña Administrativa (Pegar Token GHP):</label>
-                    <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required>
-                    <small style="color: #666; font-size: 11px; margin-top: 5px; display: block;">Tu clave de acceso es tu Personal Access Token de GitHub.</small>
-                </div>
-                <button type="submit" style="width: 100%; padding: 14px; font-size: 16px;">Sincronizar e Ingresar</button>
-            </form>
-            <p id="loginError" style="color:var(--rojo); font-weight:bold; margin-top:15px; display:none;">⚠️ Credenciales o Token inválidos. Revisa e intenta de nuevo.</p>
-        </div>
-    </div>
-
     <header>
         <h1>Panel de Administración - Padrón AMP</h1>
         <p>Gestión de Afiliados en Tiempo Real</p>
     </header>
 
     <div class="container">
-        <div class="config-box" style="border-left: 5px solid var(--verde); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <div>
-                <h3 style="margin: 0; color: var(--verde);">Sincronización en la Nube Activa</h3>
-                <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Conectado al repositorio de producción: <strong>ofmoreno-collab/PADRON</strong></p>
+        <div class="config-box">
+            <h2>🔑 Configuración de Sincronización</h2>
+            <p style="font-size: 13px; color: #666;">Para guardar cambios de forma automática, ingresa los datos de tu repositorio de GitHub.</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Usuario de GitHub:</label>
+                    <input type="text" id="ghUser" value="ofmoreno-collab">
+                </div>
+                <div class="form-repo">
+                    <label>Nombre del Repositorio:</label>
+                    <input type="text" id="ghRepo" value="PADRON">
+                </div>
+                <div class="form-group">
+                    <label>GitHub Personal Token (PAT):</label>
+                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+                </div>
             </div>
-            <div id="statusBadge" style="font-weight: bold; color: var(--verde);">✅ Sincronizado</div>
+            <button onclick="cargarDesdeGitHub()">🔄 Conectar y Cargar Lista</button>
         </div>
 
         <div class="config-box" style="border-left: 5px solid var(--naranja);">
             <h2>📂 Subida Masiva de Planilla Real (Reemplazo Inicial)</h2>
-            <p style="font-size: 13px; color: #666;">Usa esta opción solo para cargar la base de datos completa desde un archivo CSV. **Reemplazará la lista actual**.</p>
+            <p style="font-size: 13px; color: #666;">Usa esta opción para cargar o corregir la base completa desde un archivo CSV.</p>
             <input type="file" id="csvFile" accept=".csv" style="margin-bottom: 15px;">
             <button class="btn-success" onclick="procesarArchivoCSV()">📊 Cargar Archivo a la Memoria</button>
         </div>
@@ -218,7 +189,7 @@
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <span id="contadorAfiliados" style="font-weight: bold;">Afiliados en lista: 0</span>
-                <button class="btn-success" id="btnGuardarGitHub" style="font-size: 16px; padding: 12px 25px;" onclick="guardarCambiosEnGitHub()" disabled>💾 GUARDAR CAMBIOS EN GITHUB</button>
+                <button class="btn-success" id="btnGuardarGitHub" style="font-size: 16px;" onclick="guardarCambiosEnGitHub()" disabled>💾 GUARDAR CAMBIOS EN GITHUB</button>
             </div>
 
             <div class="table-container">
@@ -234,7 +205,7 @@
                     </thead>
                     <tbody id="cuerpoTabla">
                         <tr>
-                            <td colspan="5" style="text-align: center; color: #888;">Cargando datos...</td>
+                            <td colspan="5" style="text-align: center; color: #888;">Haz clic en "Conectar y Cargar Lista" o sube un archivo CSV.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -243,64 +214,34 @@
     </div>
 
     <script>
-        // Datos automatizados del repositorio
-        const CONFIG = {
-            user: "ofmoreno-collab",
-            repo: "PADRON",
-            token: "" // Se llenará dinámicamente desde el login
-        };
-
         let afiliados = []; 
         let encabezadoCSV = "Nro,Apellido,Nombre,DNI,Estado";
-        let archivoSha = ""; 
+        let archivoSha = "";
 
-        // INTERCEPTOR DE INICIO DE SESIÓN
-        function verificarLogin(event) {
-            event.preventDefault();
-            const usuarioInput = document.getElementById('loginUser').value.trim();
-            const tokenInput = document.getElementById('loginToken').value.trim();
+        function cargarDesdeGitHub() {
+            const user = document.getElementById('ghUser').value;
+            const repo = document.getElementById('ghRepo').value;
+            const token = document.getElementById('ghToken').value;
 
-            if (usuarioInput === 'amp2026' && tokenInput.startsWith('ghp_')) {
-                CONFIG.token = tokenInput; // Asignamos el token temporalmente a la memoria
-                
-                // Intentamos conectar a GitHub usando el token suministrado como contraseña
-                cargarDesdeGitHubDirecto();
-            } else {
-                mostrarErrorLogin();
-            }
-        }
+            if(!token) { alert("Por favor ingresa tu GitHub Personal Token para conectar."); return; }
 
-        function mostrarErrorLogin() {
-            document.getElementById('loginError').style.display = 'block';
-            document.getElementById('loginToken').value = '';
-        }
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/Afiliados.csv`;
 
-        // CARGAR DESDE GITHUB USANDO EL TOKEN DEL LOGIN
-        function cargarDesdeGitHubDirecto() {
-            const url = `https://api.github.com/repos/${CONFIG.user}/${CONFIG.repo}/contents/Afiliados.csv`;
-
-            fetch(url, {
-                headers: { "Authorization": `token ${CONFIG.token}` }
-            })
+            fetch(url, { headers: { "Authorization": `token ${token}` } })
             .then(res => {
-                if(!res.ok) throw new Error("Acceso denegado.");
+                if(!res.ok) throw new Error("No se pudo encontrar el archivo o el token es inválido.");
                 return res.json();
             })
             .then(data => {
-                archivoSha = data.sha; 
-                const contenidoBruto = atob(data.content); 
+                archivoSha = data.sha;
+                const contenidoBruto = decodeURIComponent(escape(atob(data.content))); // Decodificación segura UTF-8
                 importarTextoCSV(contenidoBruto);
-                
-                // Todo correcto: ocultamos pantalla de login y desbloqueamos el panel
-                document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('btnGuardarGitHub').disabled = false;
+                alert("¡Base de datos sincronizada desde GitHub correctamente!");
             })
-            .catch(err => {
-                mostrarErrorLogin();
-            });
+            .catch(err => alert(err.message));
         }
 
-        // PROCESAR SUBIDA DE ARCHIVO MANUAL (EN MEMORIA)
         function procesarArchivoCSV() {
             const fileInput = document.getElementById('csvFile');
             if (fileInput.files.length === 0) { alert("Selecciona un archivo .csv primero."); return; }
@@ -311,42 +252,54 @@
             lector.onload = function(e) {
                 importarTextoCSV(e.target.result);
                 document.getElementById('btnGuardarGitHub').disabled = false;
-                alert("Archivo cargado con éxito en la memoria. Recuerda presionar 'GUARDAR CAMBIOS EN GITHUB' para impactar en producción.");
+                alert("Archivo cargado con éxito en la memoria. RECUERDA PRESIONAR 'GUARDAR CAMBIOS EN GITHUB'.");
             };
-            lector.readAsText(archivo);
+            lector.readAsText(archivo, "UTF-8");
         }
 
-        // TRADUCIR TEXTO CSV A MATRIZ DE OBJETOS
         function importarTextoCSV(texto) {
             const lineas = texto.split(/\r?\n/);
             if(lineas.length === 0 || !lineas[0].trim()) return;
 
-            encabezadoCSV = lineas[0]; 
+            encabezadoCSV = "Nro,Apellido,Nombre,DNI,Estado"; 
             const separador = lineas[0].includes(';') ? ';' : ',';
+            
+            const dniVistos = new Set();
             afiliados = [];
 
             for(let i = 1; i < lineas.length; i++) {
                 if(!lineas[i].trim()) continue;
                 const columnas = lineas[i].split(separador);
-                
+                if(columnas.length < 4) continue;
+
+                // Limpieza estricta de DNI quitando espacios ocultos o puntos
+                const dniLimpio = columnas[3].replace(/[^0-9]/g, '').trim();
+                if(!dniLimpio) continue;
+
+                // CONTROL ANTI-DUPLICADOS: Si ya existe en la lista, se omite para evitar conflictos
+                if (dniVistos.has(dniLimpio)) {
+                    console.warn("DNI Duplicado omitido en la importación: " + dniLimpio);
+                    continue; 
+                }
+                dniVistos.add(dniLimpio);
+
                 afiliados.push({
                     nro: columnas[0] ? columnas[0].replace(/"/g, '').trim() : i,
                     apellido: columnas[1] ? columnas[1].replace(/"/g, '').trim() : '',
                     nombre: columnas[2] ? columnas[2].replace(/"/g, '').trim() : '',
-                    dni: columnas[3] ? columnas[3].replace(/[^0-9]/g, '') : '',
-                    estado: columnas[4] ? columnas[4].replace(/"/g, '').trim() : 'Activo'
+                    dni: dniLimpio,
+                    estado: columnas[4] ? columnas[4].replace(/"/g, '').replace(/\r/g, '').trim() : 'Activo'
                 });
             }
             renderizarTabla();
         }
 
-        // RENDERIZAR TABLA EN PANTALLA
         function renderizarTabla(listaFiltrada = null) {
             const lista = listaFiltrada || afiliados;
             const tbody = document.getElementById('cuerpoTabla');
             tbody.innerHTML = "";
 
-            document.getElementById('contadorAfiliados').innerText = `Afiliados en lista: ${afiliados.length}`;
+            document.getElementById('contadorAfiliados').innerText = `Afiliados únicos en lista: ${afiliados.length}`;
 
             if(lista.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #888;">No se encontraron resultados.</td></tr>`;
@@ -374,7 +327,6 @@
             });
         }
 
-        // CAMBIAR ESTADO DE UN AFILIADO
         function cambiarEstado(dni, nuevoEstado) {
             const index = afiliados.findIndex(a => a.dni === dni);
             if(index !== -1) {
@@ -383,13 +335,12 @@
             }
         }
 
-        // AGREGAR INDIVIDUAL
         function agregarAfiliado(event) {
             event.preventDefault();
-            const dni = document.getElementById('addDni').value.replace(/[^0-9]/g, '');
+            const dni = document.getElementById('addDni').value.replace(/[^0-9]/g, '').trim();
             
             if(afiliados.some(a => a.dni === dni)) {
-                alert("⚠️ Error: Ya existe un afiliado con ese DNI.");
+                alert("⚠️ Error: Ya existe un afiliado con ese DNI en la lista.");
                 return;
             }
 
@@ -401,12 +352,11 @@
                 estado: document.getElementById('addEstado').value
             };
 
-            afiliados.unshift(nuevo); 
+            afiliados.unshift(nuevo);
             document.getElementById('formNuevo').reset();
             filtrarTabla();
         }
 
-        // FILTRAR BUSCADOR
         function filtrarTabla() {
             const busqueda = document.getElementById('tablaBuscador').value.toLowerCase().trim();
             if(!busqueda) {
@@ -421,14 +371,17 @@
             renderizarTabla(filtrados);
         }
 
-        // COMPILAR NUEVO CSV Y GUARDAR DIRECTO EN GITHUB VIA API
         function guardarCambiosEnGitHub() {
-            if(!CONFIG.token || !archivoSha) {
-                alert("Faltan credenciales de sesión activa.");
+            const user = document.getElementById('ghUser').value;
+            const repo = document.getElementById('ghRepo').value;
+            const token = document.getElementById('ghToken').value;
+
+            if(!token || !archivoSha) {
+                alert("Faltan credenciales o no has cargado la lista inicial desde GitHub.");
                 return;
             }
 
-            if(!confirm("¿Estás seguro de que deseas guardar estos cambios directamente en GitHub? Modificará el portal de verificación inmediatamente.")) return;
+            if(!confirm("¿Deseas guardar los cambios? Esto modificará el portal de consultas inmediatamente.")) return;
 
             const separador = encabezadoCSV.includes(';') ? ';' : ',';
             let lineasCSV = [encabezadoCSV];
@@ -442,29 +395,29 @@
             const contenidoCSVFinal = lineasCSV.join("\n");
             const contenidoBase64 = btoa(unescape(encodeURIComponent(contenidoCSVFinal)));
 
-            const url = `https://api.github.com/repos/${CONFIG.user}/${CONFIG.repo}/contents/Afiliados.csv`;
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/Afiliados.csv`;
 
             const datosRequest = {
-                message: "Update Afiliados.csv via Panel de Administracion",
+                message: "Update Afiliados.csv - Limpieza anti-duplicados",
                 content: contenidoBase64,
-                sha: archivoSha 
+                sha: archivoSha
             };
 
             fetch(url, {
                 method: "PUT",
                 headers: {
-                    "Authorization": `token ${CONFIG.token}`,
+                    "Authorization": `token ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(datosRequest)
             })
             .then(res => {
-                if(!res.ok) throw new Error("Error al guardar en GitHub. Comprueba la validez de tu token.");
+                if(!res.ok) throw new Error("Error al guardar en GitHub.");
                 return res.json();
             })
             .then(data => {
-                archivoSha = data.content.sha; 
-                alert("🎉 ¡Padrón actualizado exitosamente en GitHub! Los cambios ya impactan en el portal de verificación.");
+                archivoSha = data.content.sha;
+                alert("🎉 ¡Padrón actualizado con éxito! Espera 30 segundos y vuelve a probar la verificación.");
             })
             .catch(err => alert(err.message));
         }

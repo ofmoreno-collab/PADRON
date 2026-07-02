@@ -12,6 +12,8 @@
             --gris-fondo: #f4f6f9; 
             --gris-borde: #cccccc;
             --texto-oscuro: #333333;
+            --verde-whatsapp: #25D366;
+            --verde-whatsapp-oscuro: #128C7E;
         }
         
         body { 
@@ -133,6 +135,7 @@
         .card p { color: #555; font-size: 14px; line-height: 1.5; }
         .card a { display: inline-block; color: var(--azul-principal); text-decoration: none; font-weight: bold; margin-top: 15px;}
 
+        /* VENTANA EMERGENTE (MODAL) */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;
         }
@@ -143,7 +146,28 @@
         .modal-titulo { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
         .modal-datos { background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px; border-left: 5px solid var(--azul-principal); box-sizing: border-box;}
         .modal-datos p { margin: 8px 0; font-size: 16px; }
-        .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%;}
+        
+        .btn-cerrar { background: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
+        
+        /* BOTÓN DE WHATSAPP SOLICITADO */
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--verde-whatsapp);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.2s;
+            box-shadow: 0 3px 6px rgba(37,211,102,0.2);
+            margin-bottom: 10px;
+        }
+        .btn-whatsapp:hover { background-color: var(--verde-whatsapp-oscuro); }
         
         .status-valido { color: #155724; }
         .status-valido .modal-datos { border-left-color: #28a745; background-color: #f4faf6; }
@@ -203,50 +227,30 @@
         let lineasPlanilla = [];
         let separador = ',';
 
-        // Intentar cargar el archivo probando variaciones de nombre de forma inteligente
         window.addEventListener('DOMContentLoaded', () => {
-            const archivosAProbar = ['afiliados.csv', 'Afiliados.csv', 'AFILIADOS.CSV'];
-            let exito = false;
-
-            function intentarCargar(index) {
-                if (index >= archivosAProbar.length) {
-                    if (!exito) mostrarErrorSincronizacion();
-                    return;
-                }
-
-                fetch(archivosAProbar[index])
-                    .then(response => {
-                        if (!response.ok) throw new Error("No encontrado");
-                        return response.text();
-                    })
-                    .then(contenido => {
-                        lineasPlanilla = contenido.split(/\r?\n/);
-                        if (lineasPlanilla.length > 0) {
-                            separador = lineasPlanilla[0].includes(';') ? ';' : ',';
-                        }
-                        exito = true;
-                        activarBuscador();
-                    })
-                    .catch(() => {
-                        intentarCargar(index + 1);
-                    });
-            }
-
-            intentarCargar(0);
+            // Se fuerza la búsqueda estricta añadiendo un parámetro para saltar la caché vieja del navegador
+            fetch('afiliados.csv?v=' + new Date().getTime())
+                .then(response => {
+                    if (!response.ok) throw new Error("No encontrado");
+                    return response.text();
+                })
+                .then(contenido => {
+                    lineasPlanilla = contenido.split(/\r?\n/);
+                    if (lineasPlanilla.length > 0) {
+                        separador = lineasPlanilla[0].includes(';') ? ';' : ',';
+                    }
+                    document.getElementById('statusIndicator').className = 'estado-padrón listo';
+                    document.getElementById('dni_buscado').disabled = false;
+                    document.getElementById('btnSubmit').disabled = false;
+                    document.getElementById('dni_buscado').focus();
+                })
+                .catch(error => {
+                    console.error(error);
+                    const indicator = document.getElementById('statusIndicator');
+                    indicator.className = 'estado-padrón error';
+                    indicator.innerText = '❌ Error de sincronización: Recargue la página (Ctrl + F5).';
+                });
         });
-
-        function activarBuscador() {
-            document.getElementById('statusIndicator').className = 'estado-padrón listo';
-            document.getElementById('dni_buscado').disabled = false;
-            document.getElementById('btnSubmit').disabled = false;
-            document.getElementById('dni_buscado').focus();
-        }
-
-        function mostrarErrorSincronizacion() {
-            const indicator = document.getElementById('statusIndicator');
-            indicator.className = 'estado-padrón error';
-            indicator.innerText = '❌ Error de lectura: No se encuentra la planilla en el servidor.';
-        }
 
         function buscarAfiliado(event) {
             event.preventDefault();
@@ -292,16 +296,23 @@
                     <button class="btn-cerrar" style="background-color: #28a745;" onclick="cerrarModal()">Entendido</button>
                 `;
             } else {
+                // Texto personalizado de WhatsApp para la secretaría
+                const textoWhatsApp = encodeURIComponent(`Hola, consultamos el DNI ${dni} en el padrón de comercio y figura como No registrado. Solicito verificación de afiliación.`);
+                const enlaceWhatsapp = `https://wa.me/5493804590118?text=${textoWhatsApp}`;
+
                 content.innerHTML = `
                     <div class="modal-icono">⚠️</div>
                     <div class="modal-titulo" style="color: #dc3545;">Atención Comercio</div>
                     <div class="modal-datos">
                         <div class="mensaje-critico">No registrado</div>
                         <p style="color: #666; margin-bottom: 12px; font-size: 14px;">DNI consultado: <strong>${dni}</strong></p>
-                        <hr style="border: 0; border-top: 1px dashed #f5c6cb; margin: 12px 0;">
-                        <p style="font-weight: bold; font-size: 16px; color: #dc3545; margin: 5px 0;">📞 Llamar a administración</p>
                     </div>
-                    <button class="btn-cerrar" style="background-color: #dc3545;" onclick="cerrarModal()">Entendido</button>
+                    
+                    <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp">
+                        💬 Informes secretaría administrativa
+                    </a>
+                    
+                    <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
                 `;
             }
             modal.style.display = 'flex';
